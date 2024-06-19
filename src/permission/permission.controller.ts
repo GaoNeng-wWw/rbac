@@ -1,4 +1,4 @@
-import { Body, Controller, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, Patch, Post } from '@nestjs/common';
 import { PermissionService } from './permission.service';
 import { CreatePermissionDto } from './dto/create-permission.dto';
 import { Permission } from '../public/permission.decorator';
@@ -22,5 +22,11 @@ export class PermissionController {
     @Body() dto: UpdatePermissionDto
   ){
     return this.permissionService.updatePermission(dto);
+  }
+
+  @Get()
+  @Permission('permission::get')
+  find(){
+    return this.permissionService.findPermission();
   }
 }

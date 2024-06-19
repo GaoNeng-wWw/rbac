@@ -32,4 +32,7 @@ export class PermissionService {
     }
     return this.permission.update(id, {name,desc})
   }
+  async findPermission(){
+    return this.permission.find();
+  }
 }

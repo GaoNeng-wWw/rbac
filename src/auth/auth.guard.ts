@@ -25,9 +25,7 @@ export class AuthGuard implements CanActivate {
             throw new HttpException('异常Token', HttpStatus.FORBIDDEN);
         }
         try {
-            const payload = await this.jwt.verifyAsync(token, {
-                secret: SECRET
-            });
+            const payload = await this.jwt.decode(token);
             req['user'] = payload;
             return true;
         } catch (err) {

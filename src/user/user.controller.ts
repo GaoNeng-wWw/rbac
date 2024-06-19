@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { Permission } from '../public/permission.decorator';
@@ -15,7 +15,7 @@ export class UserController {
   }
   @Get('/info/:email')
   async getUserInfo(
-    @Query('email') email: string
+    @Param('email') email: string
   ){
     return this.userService.getUserInfo(email, ['role', 'role.permission'])
   }

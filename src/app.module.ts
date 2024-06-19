@@ -15,10 +15,11 @@ import { UserService } from './user/user.service';
 import { RoleService } from './role/role.service';
 import { PermissionService } from './permission/permission.service';
 import { Permission } from '@app/models';
+import { MenuModule } from './menu/menu.module';
 
 
 @Module({
-  imports: [DbModule, UserModule, PermissionModule, AuthModule, RoleModule],
+  imports: [DbModule, UserModule, PermissionModule, AuthModule, RoleModule, MenuModule],
   controllers: [AppController],
   providers: [
     AppService,
@@ -85,7 +86,8 @@ export class AppModule implements OnModuleInit {
     }
     const role = await this.role.create({
       name: 'admin',
-      permissionIds: [permission.id]
+      permissionIds: [permission.id],
+      menuIds: []
     })
     const user = await this.user.create({
       email: 'admin@no-reply.com',

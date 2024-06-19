@@ -2,8 +2,8 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Permission, Role } from '@app/models';
-import { In, Repository } from 'typeorm';
+import { Menu, Permission, Role } from '@app/models';
+import { DataSource, In, Repository } from 'typeorm';
 
 @Injectable()
 export class RoleService {
@@ -11,10 +11,12 @@ export class RoleService {
     @InjectRepository(Role)
     private readonly role: Repository<Role>,
     @InjectRepository(Permission)
-    private readonly permission: Repository<Permission>
+    private readonly permission: Repository<Permission>,
+    @InjectRepository(Menu)
+    private readonly menu: Repository<Menu>
   ){}
   async create(createRoleDto: CreateRoleDto) {
-    const {name, permissionIds} = createRoleDto;
+    const {name, permissionIds=[], menuIds=[]} = createRoleDto;
     const roleInfo = this.role.findOne({
       where:{
         name
@@ -28,6 +30,30 @@ export class RoleService {
         id: In(permissionIds)
       }
     });
-    return this.role.save({name, permission: permissions});
+    const menus = await this.menu.find({
+      where: {
+        id: In(menuIds)
+      }
+    })
+    return this.role.save({name, permission: permissions, menus});
+  }
+  findAll(){
+    return this.role.find();
+  }
+  async update(
+    data:UpdateRoleDto
+  ){
+    const permission = await this.permission.find({
+      where:{
+        id: In(data.permissionIds ?? [])
+      }
+    });
+    const menus = await this.menu.find({
+      where: {
+        id: In(data.menuIds ?? [])
+      }
+    });
+    const {id, name} = data;
+    return this.role.save({id,name,permission: permission.length ? permission : undefined,menus: menus.length ? menus: undefined})
   }
 }

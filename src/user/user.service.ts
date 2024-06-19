@@ -40,6 +40,7 @@ export class UserService {
   }
 
   async getUserInfo(email: string, relations: string[]=[]){
+    console.log(email)
     return this.userRep.findOne({
       where: {email},
       select: [

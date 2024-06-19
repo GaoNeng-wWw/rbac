@@ -13,4 +13,18 @@ export class RoleController {
   create(@Body() createRoleDto: CreateRoleDto) {
     return this.roleService.create(createRoleDto);
   }
+
+  @Permission('role::get')
+  @Get()
+  getAllRole(){
+    return this.roleService.findAll();
+  }
+
+  @Patch()
+  @Permission('role::update')
+  updateRole(
+    @Body() dto: UpdateRoleDto
+  ){
+    return this.roleService.update(dto);
+  }
 }

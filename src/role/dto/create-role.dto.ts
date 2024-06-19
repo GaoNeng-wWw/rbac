@@ -6,4 +6,7 @@ export class CreateRoleDto {
     @IsArray()
     @IsNotEmpty()
     permissionIds: number[];
+    @IsArray()
+    @IsNotEmpty()
+    menuIds: number[];
 }
