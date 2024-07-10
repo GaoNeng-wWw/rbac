@@ -8,7 +8,6 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
 
 public class Crypto {
-    public String randomB()
     public String pbkdf2(
             final char[] password,
             final byte[] salt,

@@ -8,7 +8,7 @@ import java.util.Set;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int id;
+    public Integer id;
     @Column()
     public String name;
     @ManyToMany(targetEntity = Permission.class)

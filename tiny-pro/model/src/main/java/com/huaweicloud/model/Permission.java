@@ -2,13 +2,12 @@ package com.huaweicloud.model;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "permission")
+@Entity(name="permission")
 public class Permission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int id;
-    @Column()
+    public Integer id;
+    @Column(name="`desc`")
     public String desc;
     @Column()
     public String name;

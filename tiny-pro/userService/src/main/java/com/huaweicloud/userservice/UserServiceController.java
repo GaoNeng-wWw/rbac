@@ -16,16 +16,15 @@ public class UserServiceController {
     private UserRepository userRepository;
     @Autowired
     private UserService userService;
-    @GetMapping("/info")
-    public String info() {
-        return "Hello World!";
-    }
-    @GetMapping("/test")
-    public String test() {
-        return "hello world!";
-    }
     @PostMapping("/reg")
     public User register(@RequestBody @Valid CreateUser user) {
         return this.userService.createUser(user);
+    }
+    @GetMapping("/info/{email}")
+    public User getUserInfo(
+            @PathVariable("email") String email
+    ){
+        // TODO
+        return this.userService.findUserByEmail(email);
     }
 }

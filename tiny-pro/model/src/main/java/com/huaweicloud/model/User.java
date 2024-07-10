@@ -1,52 +1,73 @@
 package com.huaweicloud.model;
-
+import de.rtner.misc.BinTools;
+import de.rtner.security.auth.spi.PBKDF2Engine;
+import de.rtner.security.auth.spi.PBKDF2Parameters;
 import jakarta.persistence.*;
-
-import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
+import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
 import java.time.Instant;
-import java.util.Arrays;
-import java.util.Random;
 import java.util.Set;
+import cn.hutool.core.util.RandomUtil;
 
 @Entity(name="user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int id;
+    public Integer id;
+    @Column()
     public String name;
+    @Column()
     public String email;
+    @Column()
     public String password;
+    @Column()
     public Instant createTime;
+    @Column()
     public Instant updateTime;
-    public long deleteAt;
+    @Column()
+    public Long deleteAt;
+    @Column()
     public String salt;
     @ManyToMany(targetEntity = Role.class)
     @JoinTable(name="user_role")
     public Set<Role> role;
-    public String randomBytes(int len){
-        Random random = new Random();
-        byte[] bytes = new byte[len];
-        random.nextBytes(bytes);
-        return Arrays.toString(bytes);
+    public byte[] randomBytes(int len){
+        return RandomUtil.randomString(len).getBytes();
     }
-    public String generatePassword(
-            final char[] password,
-            final byte[] salt,
-            final int iterations,
-            final int keyLen
+    public static boolean verifyPassword(
+            String hash,
+            String salt,
+            String password,
+            int iterations
     ){
-        try {
-            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
-            PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, keyLen);
-            SecretKey key = skf.generateSecret(spec);
-            return Arrays.toString(key.getEncoded());
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            throw new RuntimeException(e);
+        String newHash = User.generatePassword(
+                password,
+                salt.getBytes(),
+                iterations
+        );
+        return newHash.equals(hash);
+    }
+    public static String generatePassword(
+            final String password,
+            final byte[] salt,
+            final int iterations
+    ){
+        PBKDF2Parameters p = new PBKDF2Parameters("HmacSHA256","UTF-8",salt,iterations);
+        PBKDF2Engine engine = new PBKDF2Engine(p);
+        byte[] dk = engine.deriveKey(password);
+        return BinTools.bin2hex(dk);
+    }
+    private static String toHex(byte[] array) throws NoSuchAlgorithmException
+    {
+        BigInteger bi = new BigInteger(1, array);
+        String hex = bi.toString(16);
+
+        int paddingLength = (array.length * 2) - hex.length();
+        if(paddingLength > 0)
+        {
+            return String.format("%0"  +paddingLength + "d", 0) + hex;
+        }else{
+            return hex;
         }
     }
 

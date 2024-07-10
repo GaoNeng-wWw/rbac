@@ -2,21 +2,23 @@ package com.huaweicloud.model;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name="menu")
+@Entity(name="menu")
 public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int id;
+    Integer id;
     @Column()
     String name;
-    @Column()
-    int order;
+    @Column(name = "`order`")
+    Integer order;
     @Column(nullable = true)
-    int parentId;
+    Integer parentId;
+    @Column()
     String menuType;
     @Column(nullable = true)
     String icon;
+    @Column()
     String component;
+    @Column()
     String path;
 }
