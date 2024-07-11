@@ -84,7 +84,7 @@
         </dependency>
         <dependency>
             <groupId>com.huaweicloud</groupId>
-            <artifactId>model</artifactId>
+            <artifactId>tinypro-model</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>

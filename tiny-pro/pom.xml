@@ -23,9 +23,9 @@
     </developers>
     <modules>
         <module>tinypro-common</module>
-        <module>userService</module>
-        <module>permission</module>
-        <module>eureka</module>
+        <module>tinypro-user-service</module>
+        <module>tinypro-permission-service</module>
+        <module>tinypro-eureka</module>
     </modules>
     <scm>
         <connection/>
