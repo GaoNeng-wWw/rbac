@@ -22,10 +22,13 @@
         <developer/>
     </developers>
     <modules>
-        <module>tinypro-common</module>
+        <module>tinypro-role-service</module>
+        <module>tinypro-auth-service</module>
         <module>tinypro-user-service</module>
-        <module>tinypro-permission-service</module>
+        <module>tinypro-common</module>
         <module>tinypro-eureka</module>
+        <module>tinypro-model</module>
+        <module>tinypro-permission-service</module>
     </modules>
     <scm>
         <connection/>
