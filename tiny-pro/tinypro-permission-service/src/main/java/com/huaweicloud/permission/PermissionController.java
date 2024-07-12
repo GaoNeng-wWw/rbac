@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/permission")
 public class PermissionController {
     @Autowired
     private PermissionRepository permissionRepository;

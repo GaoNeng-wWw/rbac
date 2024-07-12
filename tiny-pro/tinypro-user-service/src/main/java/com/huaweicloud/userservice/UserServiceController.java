@@ -12,7 +12,6 @@ import org.springframework.web.client.HttpClientErrorException;
 
 
 @RestController
-@RequestMapping("/user")
 public class UserServiceController {
     @Autowired
     private UserRepository userRepository;

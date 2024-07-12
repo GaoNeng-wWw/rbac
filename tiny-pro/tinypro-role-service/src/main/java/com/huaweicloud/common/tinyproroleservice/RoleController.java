@@ -18,7 +18,6 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/role")
 public class RoleController {
     @Autowired
     private RoleRepository roleRepository;
