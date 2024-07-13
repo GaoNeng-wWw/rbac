@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.server.ResponseStatusException;
 
 
 @RestController
@@ -37,5 +38,8 @@ public class UserServiceController {
     ){
         this.userService.deleteUser(email);
     }
-
+    @GetMapping("/test")
+    public void test(){
+        throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
+    }
 }
