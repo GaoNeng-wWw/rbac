@@ -22,6 +22,10 @@ public class AuthController {
     private UserRepository userRepository;
     @Value("${com.huaweicloud.auth.secret}")
     private String secret;
+    @GetMapping("test")
+    public String test() {
+        throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "");
+    }
     @PostMapping("logout")
     public void logout(
             @RequestBody

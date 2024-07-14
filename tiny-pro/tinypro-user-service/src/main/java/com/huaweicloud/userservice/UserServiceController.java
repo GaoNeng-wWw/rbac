@@ -5,6 +5,7 @@ import com.huaweicloud.model.User;
 import com.huaweicloud.model.UserRepository;
 import com.huaweicloud.userservice.dto.CreateUser;
 import jakarta.validation.Valid;
+import jakarta.ws.rs.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -38,8 +39,10 @@ public class UserServiceController {
     ){
         this.userService.deleteUser(email);
     }
+
+//    @ExceptionHandler({HttpClientErrorException.class})
     @GetMapping("/test")
     public void test(){
-        throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
+        throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "测试");
     }
 }
