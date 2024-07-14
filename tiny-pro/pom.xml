@@ -22,14 +22,14 @@
         <developer/>
     </developers>
     <modules>
-        <module>tinypro-role-service</module>
+        <module>tinypro-model</module>
+        <module>tinypro-eureka</module>
+        <module>tinypro-gateway</module>
+        <module>tiny-common</module>
         <module>tinypro-auth-service</module>
         <module>tinypro-user-service</module>
-        <module>tinypro-common_</module>
-        <module>tinypro-eureka</module>
-        <module>tinypro-model</module>
         <module>tinypro-permission-service</module>
-        <module>tinypro-gateway</module>
+        <module>tinypro-role-service</module>
     </modules>
     <scm>
         <connection/>
@@ -96,5 +96,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
