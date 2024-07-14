@@ -1,10 +1,10 @@
-package com.huaweicloud.common.auth;
+package com.huaweicloud.tinycommon;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AuthApplicationTests {
+class TinyCommonApplicationTests {
 
     @Test
     void contextLoads() {

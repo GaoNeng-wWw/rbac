@@ -1,14 +1,15 @@
-package com.huaweicloud.common.auth;
+package com.huaweicloud.auth;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.Getter;
 
 @Data
-@Getter
-public class LogoutDTO {
+public class LoginDTO {
     @NotBlank
     @NotNull
-    String email;
+    public String email;
+    @NotBlank
+    @NotNull
+    public String password;
 }

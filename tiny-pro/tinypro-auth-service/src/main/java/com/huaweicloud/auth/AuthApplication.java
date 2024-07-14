@@ -1,4 +1,4 @@
-package com.huaweicloud.common.auth;
+package com.huaweicloud.auth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

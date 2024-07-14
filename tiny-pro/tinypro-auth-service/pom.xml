@@ -80,7 +80,7 @@
         </dependency>
         <dependency>
             <groupId>com.huaweicloud</groupId>
-            <artifactId>tinypro-common</artifactId>
+            <artifactId>tiny-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

@@ -1,14 +1,13 @@
-package com.huaweicloud.common.auth;
+package com.huaweicloud.auth;
 
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.signers.JWTSignerUtil;
-import com.huaweicloud.Crypto;
 import com.huaweicloud.model.User;
 import com.huaweicloud.model.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Example;
 import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Value;
+import com.huaweicloud.tinycommon.Crypto;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;

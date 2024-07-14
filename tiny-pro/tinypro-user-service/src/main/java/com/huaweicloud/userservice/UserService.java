@@ -2,7 +2,7 @@ package com.huaweicloud.userservice;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.system.UserInfo;
-import com.huaweicloud.Crypto;
+import com.huaweicloud.tinycommon.Crypto;
 import com.huaweicloud.model.*;
 import com.huaweicloud.userservice.dto.ChangePassword;
 import com.huaweicloud.userservice.dto.CreateUser;

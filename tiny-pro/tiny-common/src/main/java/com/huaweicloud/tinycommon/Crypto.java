@@ -1,4 +1,4 @@
-package com.huaweicloud;
+package com.huaweicloud.tinycommon;
 
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
