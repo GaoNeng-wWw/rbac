@@ -38,7 +38,7 @@ public class AuthController {
             @Validated
             LoginDTO dto
     ) {
-        User user = this.userRepository.findByEmailAndPassword(dto.getEmail(), dto.getPassword());
+        User user = this.userRepository.findByemail(dto.getEmail());
         if (user==null){
             throw new HttpClientErrorException(
                     HttpStatus.NOT_FOUND,
@@ -48,11 +48,12 @@ public class AuthController {
         String salt = user.salt;
         Crypto crypto = new Crypto();
         String newHash = crypto.pbkdf2(
-                dto.password.toCharArray(),
+                dto.password,
                 salt.getBytes(),
-                1000,
-                18
+                1000
         );
+        System.out.println(salt);
+        System.out.println(newHash);
         if (!Objects.equals(newHash, user.password)){
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST,"密码或邮箱错误");
         }

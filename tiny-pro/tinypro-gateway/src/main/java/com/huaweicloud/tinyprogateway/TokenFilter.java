@@ -1,7 +1,12 @@
 package com.huaweicloud.tinyprogateway;
 
+import cn.hutool.jwt.JWT;
+import cn.hutool.jwt.JWTUtil;
+import cn.hutool.system.UserInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.huaweicloud.tinycommon.UserContext;
+import com.huaweicloud.tinycommon.UserInfoForToken;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,6 +38,9 @@ public class TokenFilter implements GlobalFilter, Ordered {
     @Value("${tinypro.gateway.token.whitelist:}")
     private List<String> whitelist;
 
+    @Value("${tinyproy.gateway.token.secret}")
+    private String secret;
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest req = exchange.getRequest();
@@ -44,16 +52,15 @@ public class TokenFilter implements GlobalFilter, Ordered {
         HttpHeaders header = req.getHeaders();
         String token = header.getFirst("Authorization");
         ServerHttpResponse resp = exchange.getResponse();
+        Map<String, Object> map = new HashMap<>();
+        String res = "";
         if (token == null || token.isEmpty()){
-            Map<String, Object> map = new HashMap<>();
-            String res = "";
             resp.setStatusCode(HttpStatus.UNAUTHORIZED);
             resp.getHeaders().add("Content-Type", "application/json;charset=utf-8");
             map.put("statusCode", HttpStatus.UNAUTHORIZED.value());
             map.put("message", "登陆过期");
             try {
                 res = objectMapper.writeValueAsString(map);
-                System.out.println(res);
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
@@ -61,6 +68,27 @@ public class TokenFilter implements GlobalFilter, Ordered {
             DataBuffer buffer = resp.bufferFactory().wrap(res.getBytes(StandardCharsets.UTF_8));
             return resp.writeWith(Flux.just(buffer));
         }
+        boolean verify = JWTUtil.verify(token, this.secret.getBytes(StandardCharsets.UTF_8));
+        if (!verify) {
+            resp.setStatusCode(HttpStatus.UNAUTHORIZED);
+            resp.getHeaders().add("Content-Type", "application/json;charset=utf-8");
+            map.put("statusCode", HttpStatus.UNAUTHORIZED.value());
+            map.put("message", "登陆过期");
+
+            try {
+                res = objectMapper.writeValueAsString(map);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+
+            DataBuffer buffer = resp.bufferFactory().wrap(res.getBytes(StandardCharsets.UTF_8));
+            return resp.writeWith(Flux.just(buffer));
+        }
+        JWT payload = JWTUtil.parseToken(token);
+        Object email = payload.getPayload("email");
+        UserInfoForToken userInfoForToken = new UserInfoForToken();
+        userInfoForToken.email = (String) email;
+        UserContext.setUserInfo(userInfoForToken);
         // TODO: token expire throw too
         // TODO: not jwt token throw too
         return chain.filter(exchange);

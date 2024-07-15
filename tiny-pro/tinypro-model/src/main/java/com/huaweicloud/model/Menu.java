@@ -1,7 +1,11 @@
 package com.huaweicloud.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
 
+@Data
+@Getter
 @Entity(name="menu")
 public class Menu {
     @Id

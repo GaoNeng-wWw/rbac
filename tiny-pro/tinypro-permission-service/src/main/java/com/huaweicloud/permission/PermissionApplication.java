@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableDiscoveryClient
 @EntityScan("com.huaweicloud.model")
 @EnableJpaRepositories(basePackages = "com.huaweicloud.model")
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.huaweicloud.tinycommon", "com.huaweicloud.*"})
 public class PermissionApplication {
     public static void main(String[] args) {
         SpringApplication.run(PermissionApplication.class, args);

@@ -36,8 +36,8 @@ public class User {
     @ManyToMany(targetEntity = Role.class)
     @JoinTable(name="user_role")
     public Set<Role> role;
-    public byte[] randomBytes(int len){
-        return RandomUtil.randomString(len).getBytes();
+    public String randomBytes(int len){
+        return RandomUtil.randomString(len);
     }
     public static boolean verifyPassword(
             String hash,

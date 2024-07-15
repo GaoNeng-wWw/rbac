@@ -1,5 +1,9 @@
 package com.huaweicloud.tinycommon;
 
+import de.rtner.misc.BinTools;
+import de.rtner.security.auth.spi.PBKDF2Engine;
+import de.rtner.security.auth.spi.PBKDF2Parameters;
+
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -9,18 +13,13 @@ import java.util.Arrays;
 
 public class Crypto {
     public String pbkdf2(
-            final char[] password,
-            final byte[] salt,
-            final int iterations,
-            final int keyLen
+            String password,
+            byte[] salt,
+            int iterations
     ){
-        try {
-            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
-            PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, keyLen);
-            SecretKey key = skf.generateSecret(spec);
-            return Arrays.toString(key.getEncoded());
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            throw new RuntimeException(e);
-        }
+        PBKDF2Parameters p = new PBKDF2Parameters("HmacSHA256","UTF-8",salt,iterations);
+        PBKDF2Engine engine = new PBKDF2Engine(p);
+        byte[] dk = engine.deriveKey(password);
+        return BinTools.bin2hex(dk);
     }
 }

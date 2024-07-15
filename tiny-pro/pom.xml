@@ -30,6 +30,7 @@
         <module>tinypro-user-service</module>
         <module>tinypro-permission-service</module>
         <module>tinypro-role-service</module>
+        <module>tinypro-menu-service</module>
     </modules>
     <scm>
         <connection/>

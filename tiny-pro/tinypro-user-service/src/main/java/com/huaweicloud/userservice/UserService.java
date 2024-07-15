@@ -44,16 +44,18 @@ public class UserService {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "用户存在");
         }
         User user = new User();
-        byte[] salt = user.randomBytes(4);
+        String salt = user.randomBytes(4);
         String password = User.generatePassword(
                 data.password,
-                salt,
+                salt.getBytes(StandardCharsets.UTF_8),
                 1000
         );
+        System.out.println(salt);
+        System.out.println(password);
         user.name = data.username;
         user.password = password;
         user.email = data.email;
-        user.salt = StrUtil.str(salt, StandardCharsets.UTF_8);
+        user.salt = salt;
         Set<Role> roles = new HashSet<>();
         Iterable<Role> rawRoles = this.roleRepository.findAllById(data.roleIds);
         rawRoles.forEach(roles::add);
@@ -91,10 +93,9 @@ public class UserService {
     ){
         Crypto crypto = new Crypto();
         String newHash = crypto.pbkdf2(
-                password.toCharArray(),
+                password,
                 salt.getBytes(),
-                1000,
-                18
+                1000
         );
         return newHash.equals(hash);
     }
@@ -117,7 +118,7 @@ public class UserService {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "旧密码错误");
         }
         Crypto crypto = new Crypto();
-        user.password = crypto.pbkdf2(data.newPassword.toCharArray(), user.salt.getBytes(), 1000,18);
+        user.password = crypto.pbkdf2(data.newPassword, user.salt.getBytes(), 1000);
         this.userRepository.save(user);
         // TODO: logout
     }
