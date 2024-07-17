@@ -1,0 +1,175 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8080/eureka/
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway: debug
+
+server:
+  port: 9000
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/ospp-nest
+    hikari:
+      connection-timeout: 20000
+      minimum-idle: 5
+      maximum-pool-size: 12
+      idle-timeout: 30000
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.enable_lazy_load_no_trans: true
+      hibernate.hibernate.generate_statistics: true
+      hibernate.hibernate.default_schema: ospp-nest
+
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - filters:
+            - PrefixPath=/user
+          id: user
+          predicates:
+            - Path=/user/**
+          uri: lb://user
+        - filters:
+            - PrefixPath=/role
+          id: role
+          predicates:
+            - Path=/role/**
+          uri: lb://role
+        - filters:
+            - PrefixPath=/permission
+          id: permission
+          predicates:
+            - Path=/permission/**
+          uri: lb://permission
+        - filters:
+            - PrefixPath=/auth
+          id: auth
+          predicates:
+            - Path=/auth/**
+          uri: lb://auth
+        - filters:
+            - PrefixPath=/menu
+          id: menu
+          predicates:
+            - Path=/menu/**
+          uri: lb://menu
+tinypro:
+  gateway:
+    permission:
+      - path: /user
+        method: GET
+        logic: AND
+        permission:
+          - user::query
+
+      - path: /user/reg
+        method: POST
+        logic: AND
+        permission:
+          - user::add
+
+      - path: /user/info/{email}
+        method: GET
+
+      - path: /user/{email}
+        method: DELETE
+        logic: AND
+        permission:
+          - user::remove
+
+      - path: /role/
+        method: POST
+        logic: AND
+        permission:
+          - role::add
+
+      - path: /role/
+        method: DELETE
+        logic: AND
+        permission:
+          - role::remove
+
+      - path: /role/
+        method: PATCH
+        logic: AND
+        permission:
+          - role::update
+
+      - path: /role/
+        method: GET
+        logic: AND
+        permission:
+          - role::get
+
+      - path: /role/info/{id}
+        method: GET
+        logic: AND
+        permission:
+          - role::get
+
+      - path: /permission/
+        method: POST
+        logic: AND
+        permission:
+          - permission::create
+
+      - path: /permission/
+        method: DELETE
+        logic: AND
+        permission:
+          - permission::remove
+
+      - path: /permission/
+        method: PATCH
+        logic: AND
+        permission:
+          - permission::update
+
+      - path: /permission/
+        method: GET
+
+      - path: /menu/
+        method: POST
+        logic: AND
+        permission:
+          - menu::add
+
+      - path: /menu/
+        method: DELETE
+        logic: AND
+        permission:
+          - menu::remove
+
+      - path: /menu/
+        method: PATCH
+        logic: AND
+        permission:
+          - menu::update
+
+      - path: /menu/
+        method: GET
+
+      - path: /auth/logout
+        method: POST
+      - path: /auth/login
+        method: POST
+
+    token:
+      secret: secret
+      whitelist: /auth/login,/auth/logout,/user/reg
