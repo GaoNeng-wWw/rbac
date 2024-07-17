@@ -29,6 +29,10 @@ const plugin: EggPlugin = {
     enable: true,
     package: 'egg-tracer',
   },
+  sequelize: {
+    enable: true,
+    package: 'egg-sequelize',
+  },
 };
 
 export default plugin;

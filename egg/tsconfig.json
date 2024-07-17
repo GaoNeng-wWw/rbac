@@ -3,7 +3,7 @@
   "compilerOptions": {
     "declaration": false,
     "paths": {
-      "@/module/*": ["app/module/*"]
+      "@/service/*": ["app/service/*"]
     },
     "baseUrl": "."
   }

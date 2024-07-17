@@ -5,10 +5,22 @@ export default (appInfo: EggAppInfo) => {
 
   // override config from framework / plugin
   // use for cookie sign key, should change to your own and keep security
-  config.keys = appInfo.name + '_1721194838857_3939';
+  config.keys = appInfo.name + '_1721200598000_5573';
 
   // add your egg config in here
   config.middleware = [];
+
+  config.sequelize = {
+    username: 'root',
+    password: 'root',
+    database: 'ospp-nest',
+    host: '127.0.0.1',
+    dialect: 'mysql',
+    define: {
+      underscored: false,
+      freezeTableName: false,
+    },
+  };
 
   // add your special config in here
   const bizConfig = {
