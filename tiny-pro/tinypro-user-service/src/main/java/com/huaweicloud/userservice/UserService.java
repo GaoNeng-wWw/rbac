@@ -25,14 +25,15 @@ public class UserService {
     private RoleRepository roleRepository;
     private Logger logger = LoggerFactory.getLogger(UserService.class);
     public SafeUserInfo findSafeUserInfoByEmail(String email){
-        System.out.println(
-                this.userRepository.findByemail(email).email
-        );
         User user = this.userRepository.findByemail(email);
         if (user == null){
             return null;
         }
-        return new SafeUserInfo(user.id,user.name,user.email,user.createTime,user.updateTime,user.deleteAt,user.role);
+        Set<ExcludeMenuRole> excludeMenuRoleSet = new HashSet<>(Set.of());
+        user.role.forEach(role -> {
+            excludeMenuRoleSet.add(role.getExcludeMenuRole());
+        });
+        return new SafeUserInfo(user.id,user.name,user.email,user.createTime,user.updateTime,user.deleteAt, excludeMenuRoleSet);
     }
 
     public User createUser(CreateUser data){
@@ -68,10 +69,10 @@ public class UserService {
         if (user==null) {
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "用户不存在");
         }
-        Set<Role> roles = user.getRole() == null ? new HashSet<>() : user.getRole();
+        Set<ExcludeMenuRole> roles = user.getRole() == null ? new HashSet<>() : user.getRole();
         Set<String> permissions = new HashSet<>();
-        for (Role role : roles) {
-            Set<Permission> permission = role.permission;
+        for (ExcludeMenuRole role : roles) {
+            Set<Permission> permission = role.getPermission();
             permission.forEach(p -> {
                 permissions.add(p.name);
             });

@@ -17,5 +17,5 @@ public class SafeUserInfo{
     public Instant createTime;
     public Instant updateTime;
     public Instant deleteAt;
-    public Set<Role> role;
+    public Set<ExcludeMenuRole> role;
 }

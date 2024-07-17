@@ -3,10 +3,7 @@ package com.huaweicloud.tinypromenu;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTPayload;
 import cn.hutool.jwt.JWTUtil;
-import com.huaweicloud.model.Menu;
-import com.huaweicloud.model.MenuRepository;
-import com.huaweicloud.model.User;
-import com.huaweicloud.model.UserRepository;
+import com.huaweicloud.model.*;
 import com.huaweicloud.tinycommon.UserContext;
 import com.huaweicloud.tinycommon.UserInfoForToken;
 import jakarta.validation.Valid;
@@ -37,7 +34,8 @@ public class MenuController {
         String email =JWTUtil.parseToken(token).getPayload("email").toString();
         User user = this.userRepository.findByemail(email);
         Set<Menu> rawMenus = new java.util.HashSet<Menu>(Set.of());
-        user.role.forEach(role -> {
+        Set<Role> roles = user.getRole();
+        roles.forEach(role -> {
             rawMenus.addAll(role.menu);
         });
         return TreeNodeUtils.covertToTree(rawMenus.toArray(new Menu[0]), null);

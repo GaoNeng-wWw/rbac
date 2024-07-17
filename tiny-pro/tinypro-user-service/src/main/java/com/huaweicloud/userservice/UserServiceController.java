@@ -14,7 +14,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
-import com.huaweicloud.tinycommon.ErrorHandler;
 
 import java.util.Set;
 
@@ -25,7 +24,7 @@ public class UserServiceController {
     @Autowired
     private UserService userService;
 
-    @Value("tinypro.user.pageSize")
+    @Value("#{new Integer(${tinypro.user.pageSize})}")
     int pageSize;
 
     @GetMapping("/")
@@ -55,12 +54,5 @@ public class UserServiceController {
             @PathVariable("email") String email
     ){
         this.userService.deleteUser(email);
-    }
-
-//    @ExceptionHandler({HttpClientErrorException.class,})
-    @GetMapping("/test")
-    public void test(){
-        System.out.println("test");
-        throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "测试");
     }
 }

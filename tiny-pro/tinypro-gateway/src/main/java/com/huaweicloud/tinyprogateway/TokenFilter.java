@@ -1,12 +1,8 @@
 package com.huaweicloud.tinyprogateway;
 
-import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTUtil;
-import cn.hutool.system.UserInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.huaweicloud.tinycommon.UserContext;
-import com.huaweicloud.tinycommon.UserInfoForToken;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +12,6 @@ import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
@@ -38,14 +33,14 @@ public class TokenFilter implements GlobalFilter, Ordered {
     @Value("${tinypro.gateway.token.whitelist:}")
     private List<String> whitelist;
 
-    @Value("${tinyproy.gateway.token.secret}")
+    @Value("${tinypro.gateway.token.secret}")
     private String secret;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest req = exchange.getRequest();
         String path = req.getPath().pathWithinApplication().value();
-        System.out.println(whitelist);
+        log.error(path);
         if (whitelist.contains(path)) {
             return chain.filter(exchange);
         }
@@ -55,43 +50,34 @@ public class TokenFilter implements GlobalFilter, Ordered {
         Map<String, Object> map = new HashMap<>();
         String res = "";
         if (token == null || token.isEmpty()){
-            resp.setStatusCode(HttpStatus.UNAUTHORIZED);
-            resp.getHeaders().add("Content-Type", "application/json;charset=utf-8");
-            map.put("statusCode", HttpStatus.UNAUTHORIZED.value());
-            map.put("message", "登陆过期");
-            try {
-                res = objectMapper.writeValueAsString(map);
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
-
-            DataBuffer buffer = resp.bufferFactory().wrap(res.getBytes(StandardCharsets.UTF_8));
-            return resp.writeWith(Flux.just(buffer));
+            return loginStateExpire(resp, map);
         }
-        boolean verify = JWTUtil.verify(token, this.secret.getBytes(StandardCharsets.UTF_8));
+        boolean verify = JWTUtil.verify(token.replace("Bearer ", ""), this.secret.getBytes(StandardCharsets.UTF_8));
         if (!verify) {
-            resp.setStatusCode(HttpStatus.UNAUTHORIZED);
-            resp.getHeaders().add("Content-Type", "application/json;charset=utf-8");
-            map.put("statusCode", HttpStatus.UNAUTHORIZED.value());
-            map.put("message", "登陆过期");
-
-            try {
-                res = objectMapper.writeValueAsString(map);
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
-
-            DataBuffer buffer = resp.bufferFactory().wrap(res.getBytes(StandardCharsets.UTF_8));
-            return resp.writeWith(Flux.just(buffer));
+            return loginStateExpire(resp, map);
         }
-        JWT payload = JWTUtil.parseToken(token);
-        Object email = payload.getPayload("email");
-        UserInfoForToken userInfoForToken = new UserInfoForToken();
-        userInfoForToken.email = (String) email;
-        UserContext.setUserInfo(userInfoForToken);
+        String email = (String) JWTUtil.parseToken(token.replace("Bearer ", "")).getPayload("email");
+        exchange.getAttributes().put("email", email);
         // TODO: token expire throw too
         // TODO: not jwt token throw too
         return chain.filter(exchange);
+    }
+
+    private Mono<Void> loginStateExpire(ServerHttpResponse resp, Map<String, Object> map) {
+        String res;
+        resp.setStatusCode(HttpStatus.UNAUTHORIZED);
+        resp.getHeaders().add("Content-Type", "application/json;charset=utf-8");
+        map.put("statusCode", HttpStatus.UNAUTHORIZED.value());
+        map.put("message", "登陆过期");
+
+        try {
+            res = objectMapper.writeValueAsString(map);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        DataBuffer buffer = resp.bufferFactory().wrap(res.getBytes(StandardCharsets.UTF_8));
+        return resp.writeWith(Flux.just(buffer));
     }
 
     @Override

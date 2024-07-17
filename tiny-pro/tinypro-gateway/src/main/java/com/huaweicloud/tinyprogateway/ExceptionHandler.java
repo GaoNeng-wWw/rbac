@@ -62,7 +62,7 @@ public class ExceptionHandler implements ErrorWebExceptionHandler  {
                             break;
                         }
                         default: {
-                            msg = "内部错误";
+                            msg = ex.getMessage();
                             break;
                         }
 

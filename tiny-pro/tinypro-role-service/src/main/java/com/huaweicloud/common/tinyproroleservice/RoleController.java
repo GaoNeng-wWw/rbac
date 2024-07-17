@@ -1,10 +1,8 @@
 package com.huaweicloud.common.tinyproroleservice;
 
-import com.huaweicloud.model.Permission;
-import com.huaweicloud.model.PermissionRepository;
-import com.huaweicloud.model.Role;
-import com.huaweicloud.model.RoleRepository;
+import com.huaweicloud.model.*;
 import jakarta.validation.Valid;
+import jakarta.ws.rs.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -23,6 +21,8 @@ public class RoleController {
     private RoleRepository roleRepository;
     @Autowired
     private PermissionRepository permissionRepository;
+    @Autowired
+    private MenuRepository menuRepository;
     @PostMapping("")
     public Role createRole(@RequestBody @Validated AddRoleDto data) {
         Role role = new Role();
@@ -39,12 +39,12 @@ public class RoleController {
             @Valid
             DeleteRoleDTO data
     ){
-        Optional<Role> role = this.roleRepository.findById(data.id);
-        if (role.isEmpty()){
+        Optional<Role> roleOptional = this.roleRepository.findById(data.id);
+        if (roleOptional.isEmpty()){
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "角色不存在");
         }
         this.roleRepository.deleteById(data.id);
-        return role.get();
+        return roleOptional.get();
     }
     @PatchMapping("")
     public Role updateRole(
@@ -57,10 +57,18 @@ public class RoleController {
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "角色不存在");
         }
         role.get().name = data.name;
-        Iterable<Permission> rawPermission = this.permissionRepository.findAllById(data.permissionIds);
-        Set<Permission> permissions = Set.of();
-        rawPermission.forEach(permissions::add);
-        role.get().permission = permissions;
+        if (!data.permissionIds.isEmpty()){
+            Iterable<Permission> rawPermission = this.permissionRepository.findAllById(data.permissionIds);
+            Set<Permission> permissions = Set.of();
+            rawPermission.forEach(permissions::add);
+            role.get().setPermission(permissions);
+        }
+        if (!data.menuIds.isEmpty()) {
+            Iterable<Menu> rawMenus = this.menuRepository.findAllById(data.menuIds);
+            Set<Menu> menus = Set.of();
+            rawMenus.forEach(menus::add);
+            role.get().setMenu(menus);
+        }
         return roleRepository.save(role.get());
     }
 
@@ -70,5 +78,15 @@ public class RoleController {
         List<Role> roles = new ArrayList<>();
         rawRoles.forEach(roles::add);
         return roles;
+    }
+
+    @GetMapping("/info/{id}")
+    public Role getRoleInfo(@PathParam("id") int id){
+        Optional<Role> roleOptional =  this.roleRepository.findById(id);
+        if (roleOptional.isEmpty()){
+            throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "角色不存在");
+        }
+        Role role = roleOptional.get();
+        return role.getRole();
     }
 }
