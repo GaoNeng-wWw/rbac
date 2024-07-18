@@ -4,7 +4,7 @@ import { HelloService } from '@/service/hello';
 @HTTPController({
   path: '/bar',
 })
-export class UserController {
+export class Hello {
   @Inject()
   helloService: HelloService;
 
@@ -12,7 +12,9 @@ export class UserController {
     method: HTTPMethodEnum.GET,
     path: 'user',
   })
-  async user(@HTTPQuery({ name: 'userId' }) userId: string) {
+  async user(
+    @HTTPQuery({ name: 'userId' }) userId: string,
+  ) {
     return await this.helloService.hello(userId);
   }
 }
