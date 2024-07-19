@@ -70,10 +70,13 @@ export class UserController {
     path: '/',
   })
   async getAllUser(
-    @HTTPQuery({ name: 'page' }) page = 0,
+    @HTTPQuery({ name: 'page' }) _page = 0,
     @Context() ctx:EggContext,
+    @HTTPQuery({ name: 'limit' }) _limit?:number,
   ) {
-    return await this.service.getAllUser(Number.parseInt(page.toString()), ctx);
+    const page = _page;
+    const limit = _limit ?? ctx.app.config.page.pageSize;
+    return await this.service.getAllUser(Number.parseInt(page.toString()), limit, ctx);
   }
 
   @HTTPMethod({

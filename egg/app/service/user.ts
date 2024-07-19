@@ -6,6 +6,24 @@ import { StatusCodes } from 'http-status-codes';
 import { In } from 'typeorm';
 import { pbkdf2Sync } from 'node:crypto';
 
+interface PaginateData<T> {
+  'items': T,
+  'meta': {
+    'itemCount': number,
+    'totalItems': number,
+    'itemsPerPage': number,
+    'totalPages': number,
+    'currentPage': number,
+  },
+  'links' : {
+    'first': string,
+    'previous': string,
+    'next': string,
+    'last': string,
+  }
+}
+
+
 @SingletonProto({
   accessLevel: AccessLevel.PUBLIC,
 })
@@ -69,16 +87,60 @@ export class UserService {
   }
   async getAllUser(
     page: number,
+    limit: number,
     @Context() ctx: EggContext,
   ) {
-    const pageSize = ctx.app.config.page.pageSize;
+    const pageSize = limit ?? ctx.app.config.page.pageSize;
     const userRep = ctx.app.db.getRepository(User);
+
+    const data:PaginateData<User[]> = {
+      items: [],
+      meta: {
+        itemCount: pageSize,
+        totalItems: 0,
+        itemsPerPage: pageSize,
+        totalPages: 0,
+        currentPage: 0,
+      },
+      links: {
+        first: '',
+        previous: '',
+        next: '',
+        last: '',
+      },
+    };
     const totalUser = userRep.count({
       cache: {
         id: 'cache::getAllUser::totalUser',
         milliseconds: 3000,
       },
     });
+
+
+    const totalPage = Math.ceil(await totalUser / pageSize);
+
+    const url = ctx.URL;
+    url.searchParams.delete('limit');
+    url.searchParams.delete('page');
+    url.searchParams.set('limit', pageSize.toString());
+    const first = url.toString().replace(url.origin, '');
+    url.searchParams.set('page', totalPage.toString());
+    url.searchParams.set('limit', pageSize.toString());
+    const last = url.toString().replace(url.origin, '');
+    url.searchParams.set('page', Math.max(page - 1, 0).toString());
+    const prev = url.toString().replace(url.origin, '');
+    url.searchParams.set('page', Math.min(page + 1, totalPage).toString());
+    const next = url.toString().replace(url.origin, '');
+    data.links = {
+      first,
+      last,
+      previous: prev,
+      next,
+    };
+    data.meta.totalItems = await totalUser;
+    data.meta.totalPages = totalPage;
+    data.meta.currentPage = page === 0 ? 1 : page;
+
     const skip = Math.max(page - 1, 0) * pageSize;
     const users = userRep.find({
       skip,
@@ -100,11 +162,10 @@ export class UserService {
       ],
       relations: [ 'role' ],
     });
-    const totalPages = Math.ceil(await totalUser / pageSize);
-    return {
-      users: await users,
-      totalPages,
-    };
+    data.items = await users;
+    data.meta.totalItems = data.items.length;
+
+    return data;
   }
 
   private async verifyPassword(password: string, storedHash: string, salt: string) {
@@ -164,3 +225,4 @@ export class UserService {
     return;
   }
 }
+

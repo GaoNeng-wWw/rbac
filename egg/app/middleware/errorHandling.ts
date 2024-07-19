@@ -8,6 +8,7 @@ export default () => {
     ctx:EggContext,
     next:Next,
   ) => {
+    console.log(ctx.path);
     try {
       await next();
     } catch (err) {
