@@ -1,7 +1,11 @@
-import createPermission from './create-permission';
+import { CreatePermission, createPermission } from './create-permission';
 import { partical } from './partial';
 
-export default {
+export const updatePermission = {
   ...partical(createPermission),
   id: 'int',
 } as const;
+
+export type UpdatePermission = Partial<CreatePermission> & {
+  id: number
+};

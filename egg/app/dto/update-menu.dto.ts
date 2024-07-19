@@ -1,7 +1,11 @@
-import createMenuDto from './create-menu.dto';
+import { CreateMenu, createMenu } from './create-menu.dto';
 import { partical } from './partial';
 
-export default {
-  ...partical(createMenuDto),
+export const updateMenu = {
+  ...partical(createMenu),
   id: 'int',
 } as const;
+
+export type UpdateMenu = Partial<CreateMenu> & {
+  id:number
+};

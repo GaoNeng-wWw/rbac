@@ -1,7 +1,7 @@
 import { HttpException } from 'app/utils/HttpException';
-import { Menu, Permission, Role, User } from '../app/models';
 import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
 import { DataSourceOptions } from 'typeorm';
+import { join } from 'node:path';
 
 export default (appInfo: EggAppInfo) => {
   const config = {
@@ -30,6 +30,25 @@ export default (appInfo: EggAppInfo) => {
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1721200598000_5573';
 
+  config.cluster = {
+    listen: {
+      path: '',
+      port: 3000,
+    },
+  };
+
+  config.security = {
+    xframe: {
+      enable: false,
+    },
+    csrf: {
+      enable: false,
+    },
+    xssProtection: {
+      enable: false,
+    },
+  };
+
   // add your egg config in here
   config.middleware = [
     'errorHandling',
@@ -43,13 +62,20 @@ export default (appInfo: EggAppInfo) => {
     password: 'root',
     database: 'ospp-nest',
     synchronize: true,
-    entites: [
-      User,
-      Role,
-      Permission,
-      Menu,
+    entities: [
+      join(
+        __dirname, '../app/models/*.ts',
+      ),
     ],
   } as DataSourceOptions;
+
+  config.db = {
+    autoClear: appInfo.env === 'local',
+  };
+
+  config.page = {
+    pageSize: 10,
+  };
 
   // add your special config in here
   const bizConfig = {

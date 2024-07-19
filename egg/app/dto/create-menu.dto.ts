@@ -1,4 +1,4 @@
-export default {
+const createMenu = {
   order: 'int',
   menuType: 'string',
   name: 'string',
@@ -7,3 +7,16 @@ export default {
   icon: 'string',
   parentId: 'int',
 } as const;
+
+export type CreateMenu = {
+  order: number;
+  menuType: string;
+  name: string;
+  component: string;
+  icon: string;
+  parentId: number;
+};
+
+export {
+  createMenu,
+};

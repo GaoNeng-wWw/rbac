@@ -1,7 +1,11 @@
-import createRoleDto from './create-role.dto';
+import { CreateRole, createRole } from './create-role.dto';
 import { partical } from './partial';
 
-export default {
-  ...partical(createRoleDto),
+export const updateRole = {
+  ...partical(createRole),
   id: 'int',
 } as const;
+
+export type UpdateRole = {
+  id:number
+} & Partial<CreateRole>;

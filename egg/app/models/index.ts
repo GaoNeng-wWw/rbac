@@ -1,4 +1,4 @@
-export * from './user';
-export * from './permission';
-export * from './role';
-export * from './menu';
+export { User } from './user';
+export { Permission } from './permission';
+export { Role } from './role';
+export { Menu } from './menu';

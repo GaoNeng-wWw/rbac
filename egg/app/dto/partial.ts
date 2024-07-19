@@ -20,16 +20,20 @@ export type ParticalRet<T extends {
       : never
 } & {};
 export const partical = <
-  T extends {[x:string]: any}
+  T extends Record<string, string | {type: string}>
+  // T extends {[x:string]: string | {type: string}}
 >(val:T): ParticalRet<T> => {
   const obj = Object.create(null);
   for (const [ key, value ] of Object.entries(val)) {
+    if (typeof value === 'string') {
+      obj[key] = value.endsWith('?') ? value : `${value}?`;
+    }
     if (value instanceof Object) {
       if ('type' in value) {
-        value.type = value.endWith('?') ? value : `${value}?`;
+        value.type = value.type.endsWith('?') ? value.type : `${value.type}?`;
       }
+      obj[key] = value;
     }
-    obj[key] = value;
   }
   return obj;
 };

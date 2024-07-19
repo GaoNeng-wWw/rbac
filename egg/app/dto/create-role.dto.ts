@@ -1,4 +1,4 @@
-export default {
+export const createRole = {
   name: 'string',
   permissionIds: {
     type: 'array',
@@ -9,3 +9,9 @@ export default {
     itemType: 'int',
   },
 } as const;
+
+export type CreateRole = {
+  name: string;
+  permissionIds: number[];
+  menuIds: number[];
+};

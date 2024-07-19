@@ -5,8 +5,8 @@ export class HttpException extends Error {
   public message: string;
 
   constructor(
-    code: StatusCodes,
     message: string,
+    code: StatusCodes,
   ) {
     super(message);
     this.statusCode = code;
