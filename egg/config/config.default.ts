@@ -24,6 +24,11 @@ export default (appInfo: EggAppInfo) => {
         ctx.logger.error(`${ctx.status} - ${err.message}`);
       },
     },
+    logger: {
+      disableConsoleAfterReady: false,
+      consoleLevel: 'INFO',
+      level: 'INFO',
+    },
   } as PowerPartial<EggAppConfig>;
 
   // override config from framework / plugin
@@ -53,6 +58,7 @@ export default (appInfo: EggAppInfo) => {
   config.middleware = [
     'errorHandling',
     'token',
+    'permission',
   ];
 
   config.typeorm = {
@@ -88,6 +94,81 @@ export default (appInfo: EggAppInfo) => {
       },
     ],
   };
+
+  config.permission = [
+    {
+      pattern: '/permission',
+      method: 'get',
+      permissions: [ 'permission::get' ],
+    },
+    {
+      pattern: '/permission',
+      method: 'post',
+      permissions: [ 'permission::create' ],
+    },
+    {
+      pattern: '/permission',
+      method: 'patch',
+      permissions: [ 'permission::update' ],
+    },
+    {
+      pattern: '/permission',
+      method: 'delete',
+      permissions: [ 'permission::remove' ],
+    },
+
+    {
+      pattern: '/role',
+      method: 'get',
+      permissions: [ 'role::get' ],
+    },
+    {
+      pattern: '/role/info/:id',
+      method: 'get',
+      permissions: [ 'role::get' ],
+    },
+    {
+      pattern: '/role',
+      method: 'post',
+      permissions: [ 'role::add' ],
+    },
+    {
+      pattern: '/role',
+      method: 'patch',
+      permissions: [ 'role::update' ],
+    },
+    {
+      pattern: '/role',
+      method: 'delete',
+      permissions: [ 'role::remove' ],
+    },
+
+    {
+      pattern: '/user/reg',
+      method: 'post',
+      permissions: [ 'user::add' ],
+    },
+    {
+      pattern: '/user/info/:email',
+      method: 'get',
+      permissions: [],
+    },
+    {
+      pattern: '/user/:email',
+      method: 'delete',
+      permissions: [ 'user::remove' ],
+    },
+    {
+      pattern: '/user/update',
+      method: 'patch',
+      permissions: [ 'user::update' ],
+    },
+    {
+      pattern: '/user/',
+      method: 'get',
+      permissions: [ 'user::qeury' ],
+    },
+  ];
 
   // add your special config in here
   const bizConfig = {
