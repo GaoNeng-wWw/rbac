@@ -10,6 +10,19 @@ interface ValidateError {
   message: string;
 }
 
+export type WhiteListItem = {
+  pattern: string,
+  method: string
+};
+
+declare module '@types/koa' {
+  export interface Request {
+    user: {
+      email: string;
+    }
+  }
+}
+
 declare module 'egg' {
     export interface Application {
         db: DataSource;
@@ -39,10 +52,8 @@ declare module 'egg' {
       }[];
       jwt: {
         secret: string;
-        whitelist: {
-          pattern: string,
-          method: string
-        }[]
+        expiresIn: string;
+        whitelist: WhiteListItem[];
       }
     }
 }

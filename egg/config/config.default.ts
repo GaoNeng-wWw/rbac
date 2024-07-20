@@ -52,6 +52,7 @@ export default (appInfo: EggAppInfo) => {
   // add your egg config in here
   config.middleware = [
     'errorHandling',
+    'token',
   ];
 
   config.typeorm = {
@@ -75,6 +76,17 @@ export default (appInfo: EggAppInfo) => {
 
   config.page = {
     pageSize: 10,
+  };
+
+  config.jwt = {
+    secret: 'secret',
+    expiresIn: '2h',
+    whitelist: [
+      {
+        pattern: '/auth/login',
+        method: 'post',
+      },
+    ],
   };
 
   // add your special config in here

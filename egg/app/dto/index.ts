@@ -9,3 +9,5 @@ export * from './update-menu.dto';
 export * from './update-permission';
 export * from './update-role.dto';
 export * from './update-user.dto';
+export * from './create-auth.dto';
+export * from './logout-auth.dto';
