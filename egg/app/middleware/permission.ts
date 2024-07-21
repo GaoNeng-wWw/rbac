@@ -14,13 +14,15 @@ export default () => {
     const reqMethod = ctx.method.toLowerCase();
     const permissionsList = ctx.app.config.permission;
     const route = permissionsList.filter(p => {
-      return matcher.match(p.pattern, path);
+      return matcher.match(p.pattern, path) && p.method === reqMethod.toLowerCase();
     });
     if (!route.length) {
       ctx.logger.debug(`[MIDDLEWARE][permission]: allow ${path}`);
       await next();
       return;
     }
+    ctx.logger.debug(`[MIDDLEWARE][permission]: match route ${route[0].method.toUpperCase()} - ${route[0].pattern}`);
+
     if (!ctx.request.user) {
       ctx.status = StatusCodes.UNAUTHORIZED;
       ctx.body = {
@@ -45,16 +47,13 @@ export default () => {
       };
       return;
     }
+
     const userPermissions = user?.role.flatMap(role => role.permission).map(p => p.name);
     if (userPermissions.includes('*')) {
       await next();
       return;
     }
-    const { method, permissions } = route[0];
-    if (method !== reqMethod) {
-      await next();
-      return;
-    }
+    const { permissions } = route[0];
     let allow = false;
     for (const p of permissions) {
       if (allow) {
@@ -68,6 +67,7 @@ export default () => {
         statusCode: StatusCodes.FORBIDDEN,
         message: '权限不足',
       };
+      return;
     }
     await next();
   };

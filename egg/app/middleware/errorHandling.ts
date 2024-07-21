@@ -2,6 +2,7 @@ import { EggContext, Next } from '@eggjs/tegg';
 import { HttpException } from 'app/utils/HttpException';
 import { ValidateException } from 'app/utils/ValidateError';
 import { StatusCodes } from 'http-status-codes';
+import { JsonWebTokenError, NotBeforeError, TokenExpiredError } from 'jsonwebtoken';
 
 export default () => {
   return async (
@@ -27,6 +28,22 @@ export default () => {
           statusCode: status,
           message: err instanceof HttpException ? err.message : '网络错误',
         };
+      }
+      if (err instanceof TokenExpiredError) {
+        ctx.status = StatusCodes.BAD_REQUEST;
+        ctx.body = {
+          statusCode: StatusCodes.BAD_REQUEST,
+          message: '登陆过期',
+        };
+        return;
+      }
+      if (err instanceof JsonWebTokenError || err instanceof NotBeforeError) {
+        ctx.status = StatusCodes.FORBIDDEN;
+        ctx.body = {
+          statusCode: StatusCodes.FORBIDDEN,
+          message: 'token 异常',
+        };
+        return;
       }
     }
   };

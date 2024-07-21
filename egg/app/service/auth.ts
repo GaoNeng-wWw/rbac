@@ -42,8 +42,11 @@ export class AuthService {
       },
       select: [ 'email', 'password', 'deleteAt', 'salt' ],
     });
-    if (!userInfo || userInfo.deleteAt) {
+    if (!userInfo) {
       throw new HttpException('用户不存在', StatusCodes.NOT_FOUND);
+    }
+    if (Number(userInfo.deleteAt)) {
+      throw new HttpException('用户被停用', StatusCodes.NOT_FOUND);
     }
     if (encry(password, userInfo.salt) !== userInfo.password) {
       throw new HttpException('密码或邮箱错误', StatusCodes.BAD_REQUEST);

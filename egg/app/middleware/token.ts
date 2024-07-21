@@ -2,7 +2,7 @@ import { EggContext, Next } from '@eggjs/tegg';
 import AntPathMather from '@maxbilbow/ant-path-matcher';
 import { StatusCodes } from 'http-status-codes';
 import { WhiteListItem } from 'index';
-import { decode, JsonWebTokenError, NotBeforeError, TokenExpiredError, verify } from 'jsonwebtoken';
+import { decode, verify } from 'jsonwebtoken';
 export default () => {
   const matcher = AntPathMather();
   const inWhiteList = (
@@ -37,29 +37,9 @@ export default () => {
       };
       return;
     }
-    try {
-      verify(token, ctx.app.config.jwt.secret);
-      const payload = decode(token) as {email: string};
-      ctx.request.user = payload;
-      await next();
-    } catch (e) {
-      if (e instanceof TokenExpiredError) {
-        ctx.status = StatusCodes.BAD_REQUEST;
-        ctx.body = {
-          statusCode: StatusCodes.BAD_REQUEST,
-          message: '登陆过期',
-        };
-        return;
-      }
-      if (e instanceof JsonWebTokenError || e instanceof NotBeforeError) {
-        ctx.status = StatusCodes.FORBIDDEN;
-        ctx.body = {
-          statusCode: StatusCodes.FORBIDDEN,
-          message: 'token 异常',
-        };
-        return;
-      }
-
-    }
+    verify(token, ctx.app.config.jwt.secret);
+    const payload = decode(token) as {email: string};
+    ctx.request.user = payload;
+    await next();
   };
 };

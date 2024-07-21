@@ -149,12 +149,12 @@ export default (appInfo: EggAppInfo) => {
       permissions: [ 'user::add' ],
     },
     {
-      pattern: '/user/info/:email',
+      pattern: '/user/info/{:email}',
       method: 'get',
       permissions: [],
     },
     {
-      pattern: '/user/:email',
+      pattern: '/user/{:email}',
       method: 'delete',
       permissions: [ 'user::remove' ],
     },
