@@ -15,6 +15,7 @@ export type CreateMenu = {
   component: string;
   icon: string;
   parentId: number;
+  path: string
 };
 
 export {

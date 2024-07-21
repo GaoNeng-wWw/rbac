@@ -168,6 +168,27 @@ export default (appInfo: EggAppInfo) => {
       method: 'get',
       permissions: [ 'user::qeury' ],
     },
+
+    {
+      pattern: '/menu',
+      method: 'get',
+      permissions: [],
+    },
+    {
+      pattern: '/menu',
+      method: 'post',
+      permissions: [ 'menu::add' ],
+    },
+    {
+      pattern: '/menu',
+      method: 'patch',
+      permissions: [ 'menu::update' ],
+    },
+    {
+      pattern: '/menu',
+      method: 'delete',
+      permissions: [ 'menu::remove' ],
+    },
   ];
 
   // add your special config in here

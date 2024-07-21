@@ -9,11 +9,11 @@ export class Menu {
   @Column()
   order: number;
   @Column({ nullable: true })
-  parentId: number;
+  parentId: number | null;
   @Column()
   menuType: string;
   @Column({ nullable: true })
-  icon: string;
+  icon: string | null;
   @Column()
   component: string;
   @Column()
