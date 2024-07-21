@@ -41,6 +41,7 @@ export default () => {
       verify(token, ctx.app.config.jwt.secret);
       const payload = decode(token) as {email: string};
       ctx.request.user = payload;
+      await next();
     } catch (e) {
       if (e instanceof TokenExpiredError) {
         ctx.status = StatusCodes.BAD_REQUEST;

@@ -26,7 +26,7 @@ export default (appInfo: EggAppInfo) => {
     },
     logger: {
       disableConsoleAfterReady: false,
-      consoleLevel: 'INFO',
+      consoleLevel: 'DEBUG',
       level: 'INFO',
     },
   } as PowerPartial<EggAppConfig>;

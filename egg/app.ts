@@ -43,7 +43,7 @@ export default class AppBootHook {
 
     const ROOT = __dirname;
     const LOCK_FILE = join(ROOT, 'lock');
-    if (existsSync(LOCK_FILE)) {
+    if (existsSync(LOCK_FILE) && this.app.env !== 'local') {
       return;
     }
     const modules = [ 'user', 'permission', 'role', 'menu' ];

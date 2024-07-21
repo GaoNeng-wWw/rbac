@@ -21,11 +21,12 @@ export class UserController {
     @Context() ctx: EggContext,
     @HTTPBody() body: CreateUser,
   ) {
+    console.log(body);
     const errors = ctx.app.validator.validate(createUser, body);
     if (errors) {
       throw new ValidateException(errors[0]);
     }
-    return await this.service.create(body, ctx);
+    return this.service.create(body, ctx);
   }
 
 

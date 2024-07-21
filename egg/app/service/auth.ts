@@ -40,7 +40,7 @@ export class AuthService {
       where: {
         email,
       },
-      select: [ 'email', 'password', 'deleteAt' ],
+      select: [ 'email', 'password', 'deleteAt', 'salt' ],
     });
     if (!userInfo || userInfo.deleteAt) {
       throw new HttpException('用户不存在', StatusCodes.NOT_FOUND);
