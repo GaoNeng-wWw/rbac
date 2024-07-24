@@ -1,5 +1,5 @@
 import localeLogin from '@/views/login/locale/zh-CN';
-// import localeTheme from '@/components/theme/locale/zh-CN';
+import localeTheme from '@/components/theme/locale/zh-CN';
 
 // import localeSearchTable from '@/views/list/search-table/locale/zh-CN';
 
@@ -18,7 +18,7 @@ import localeLogin from '@/views/login/locale/zh-CN';
 // import localeUserInfo from '@/views/user/info/locale/zh-CN';
 // import localeUserSetting from '@/views/user/setting/locale/zh-CN';
 
-// import localekanban from '@/views/board/locale/zh-CN';
+import localekanban from '@/views/board/locale/zh-CN';
 
 // import localeHello from '@/views/cloud/hello/locale/zh-CN';
 
@@ -47,7 +47,7 @@ export default {
   'messageBox.userSettings': '用户设置',
   'messageBox.logout': '退出登录',
   'menu.cloud': '云服务能力展示',
-  // ...localeTheme,
+  ...localeTheme,
   ...localeSettings,
   ...localeLogin,
   // ...localeSearchTable,
@@ -61,7 +61,7 @@ export default {
   // ...localeUserInfo,
   // ...localeUserSetting,
   // ...localeDetailForm,
-  // ...localekanban,
+  ...localekanban,
   // ...localeHello,
   // ...localeContracts,
   ...localeHttpError,

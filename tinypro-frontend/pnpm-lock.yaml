@@ -10,13 +10,28 @@ importers:
     dependencies:
       '@opentiny/vue':
         specifier: '2'
-        version: 2.17.0(echarts@5.4.1)(vue@2.7.16)
+        version: 2.17.0(echarts@5.4.3)(vue@2.7.16)
       '@opentiny/vue-icon':
         specifier: '2'
         version: 2.17.0(vue@2.7.16)
       '@opentiny/vue-locale':
         specifier: '2'
         version: 2.17.0
+      '@opentiny/vue-theme':
+        specifier: ^3.17.3
+        version: 3.17.3
+      '@vueuse/core':
+        specifier: ^10.11.0
+        version: 10.11.0(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16)
+      axios:
+        specifier: ^1.7.2
+        version: 1.7.2
+      echarts:
+        specifier: ~5.4.3
+        version: 5.4.3
+      echarts4:
+        specifier: npm:echarts@4.9.0
+        version: echarts@4.9.0
       pinia:
         specifier: ^2.0.16
         version: 2.1.7(@vue/composition-api@1.7.2(vue@2.7.16))(typescript@4.7.4)(vue@2.7.16)
@@ -26,6 +41,9 @@ importers:
       vue-i18n:
         specifier: '8'
         version: 8.28.2(vue@2.7.16)
+      vue-i18n-bridge:
+        specifier: ^9.13.1
+        version: 9.13.1(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16)
       vue-router:
         specifier: ^3.5.4
         version: 3.6.5(vue@2.7.16)
@@ -162,6 +180,22 @@ packages:
   '@humanwhocodes/object-schema@2.0.3':
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
     deprecated: Use @eslint/object-schema instead
+
+  '@intlify/core-base@9.13.1':
+    resolution: {integrity: sha512-+bcQRkJO9pcX8d0gel9ZNfrzU22sZFSA0WVhfXrf5jdJOS24a+Bp8pozuS9sBI9Hk/tGz83pgKfmqcn/Ci7/8w==}
+    engines: {node: '>= 16'}
+
+  '@intlify/message-compiler@9.13.1':
+    resolution: {integrity: sha512-SKsVa4ajYGBVm7sHMXd5qX70O2XXjm55zdZB3VeMFCvQyvLew/dLvq3MqnaIsTMF1VkkOb9Ttr6tHcMlyPDL9w==}
+    engines: {node: '>= 16'}
+
+  '@intlify/shared@9.13.1':
+    resolution: {integrity: sha512-u3b6BKGhE6j/JeRU6C/RL2FgyJfy6LakbtfeVF8fJXURpZZTzfh3e05J0bu0XPw447Q6/WUp3C4ajv4TMS4YsQ==}
+    engines: {node: '>= 16'}
+
+  '@intlify/vue-devtools@9.13.1':
+    resolution: {integrity: sha512-CcFXqLfVmWLVEWJxtE632JaRUycuA6nd7tQfutbDns8BUTlBcKhjZi+bCZUis/Ls/YJ6ioyW4xE2TYdlReutaA==}
+    engines: {node: '>= 16'}
 
   '@jridgewell/gen-mapping@0.3.5':
     resolution: {integrity: sha512-IzL8ZoEDIBRWEzlCcRhOaCupYyN5gdIK+Q6fbFdPDg6HqX6jpkItn7DFIpW9LQzXG6Df9sA7+OKnq0qlz/GaQg==}
@@ -916,6 +950,9 @@ packages:
   '@types/semver@7.5.8':
     resolution: {integrity: sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ==}
 
+  '@types/web-bluetooth@0.0.20':
+    resolution: {integrity: sha512-g9gZnnXVq7gM7v3tJCWV/qw7w+KeOlSHAhgF9RytFyifW6AF61hdT2ucrYhPq9hLs5JIryeupHV3qGk95dH9ow==}
+
   '@typescript-eslint/eslint-plugin@5.62.0':
     resolution: {integrity: sha512-TiZzBSJja/LbhNPvk6yc0JrX9XqhQ0hdh6M2svYfsHGejaKFIAGd9MQ+ERIMzLGlN/kZoYIgdxFV0PuljTKXag==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -1059,6 +1096,15 @@ packages:
       '@types/node':
         optional: true
 
+  '@vueuse/core@10.11.0':
+    resolution: {integrity: sha512-x3sD4Mkm7PJ+pcq3HX8PLPBadXCAlSDR/waK87dz0gQE+qJnaaFhc/dZVfJz+IUYzTMVGum2QlR7ImiJQN4s6g==}
+
+  '@vueuse/metadata@10.11.0':
+    resolution: {integrity: sha512-kQX7l6l8dVWNqlqyN3ePW3KmjCQO3ZMgXuBMddIu83CmucrsBfXlH+JoviYyRBws/yLTQO8g3Pbw+bdIoVm4oQ==}
+
+  '@vueuse/shared@10.11.0':
+    resolution: {integrity: sha512-fyNoIXEq3PfX1L3NkNhtVQUSRtqYwJtJg+Bp9rIzculIZWHTkKSysujrOk2J+NrRulLTQH9+3gGSfYLWSEWU1A==}
+
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
@@ -1099,9 +1145,15 @@ packages:
     resolution: {integrity: sha512-bMxMKAjg13EBSVscxTaYA4mRc5t1UAXa2kXiGTNfZ079HIWXEkKmkgFrh/nJqamaLSrXO5H4WFFkPEaLJWbs3A==}
     engines: {node: '>= 0.4'}
 
+  asynckit@0.4.0:
+    resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
+
   available-typed-arrays@1.0.7:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
+
+  axios@1.7.2:
+    resolution: {integrity: sha512-2A8QhOMrbomlDuiLeK9XibIBzuHeRcqqNOHp0Cyp5EoJ1IFDh+XZH3A6BkXtv0K4gFGCI0Y4BM7B1wOEi0Rmgw==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -1161,6 +1213,10 @@ packages:
   color@4.2.3:
     resolution: {integrity: sha512-1rXeuUUiGGrykh+CeBdu5Ie7OJwinCgQY0bc7GCRxy5xVHy+moaqkpL/jqQq0MtQOeYcrqEz4abc5f0KtU7W4A==}
     engines: {node: '>=12.5.0'}
+
+  combined-stream@1.0.8:
+    resolution: {integrity: sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==}
+    engines: {node: '>= 0.8'}
 
   commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
@@ -1239,6 +1295,10 @@ packages:
     resolution: {integrity: sha512-8QmQKqEASLd5nx0U1B1okLElbUuuttJ/AnYmRXbbbGDWh6uS208EjD4Xqq/I9wK7u0v6O08XhTWnt5XtEbR6Dg==}
     engines: {node: '>= 0.4'}
 
+  delayed-stream@1.0.0:
+    resolution: {integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==}
+    engines: {node: '>=0.4.0'}
+
   dijkstrajs@1.0.3:
     resolution: {integrity: sha512-qiSlmBq9+BCdCA/L46dw8Uy93mloxsPSbwnm5yrKn2vMPiy8KyAskTF6zuV/j5BMsmOGZDPs7KjU+mjb670kfA==}
 
@@ -1260,8 +1320,14 @@ packages:
     peerDependencies:
       echarts: ^5.0.1
 
+  echarts@4.9.0:
+    resolution: {integrity: sha512-+ugizgtJ+KmsJyyDPxaw2Br5FqzuBnyOWwcxPKO6y0gc5caYcfnEUIlNStx02necw8jmKmTafmpHhGo4XDtEIA==}
+
   echarts@5.4.1:
     resolution: {integrity: sha512-9ltS3M2JB0w2EhcYjCdmtrJ+6haZcW6acBolMGIuf01Hql1yrIV01L1aRj7jsaaIULJslEP9Z3vKlEmnJaWJVQ==}
+
+  echarts@5.4.3:
+    resolution: {integrity: sha512-mYKxLxhzy6zyTi/FaEbJMOZU1ULGEQHaeIeuMR5L+JnJTpz+YR03mnnpBhbR4+UYJAgiXgpyTVLffPAjOTLkZA==}
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -1546,8 +1612,21 @@ packages:
   flatted@3.3.1:
     resolution: {integrity: sha512-X8cqMLLie7KsNUDSdzeN8FYK9rEt4Dt67OsG/DNGnYTSDBG4uFAJFBnUeiV+zCVAvwFy56IjM9sH51jVaEhNxw==}
 
+  follow-redirects@1.15.6:
+    resolution: {integrity: sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+
   for-each@0.3.3:
     resolution: {integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==}
+
+  form-data@4.0.0:
+    resolution: {integrity: sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==}
+    engines: {node: '>= 6'}
 
   fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
@@ -1839,6 +1918,14 @@ packages:
     resolution: {integrity: sha512-LPP/3KorzCwBxfeUuZmaR6bG2kdeHSbe0P2tY3FLRU4vYrjYz5hI4QZwV0njUx3jeuKe67YukQ1LSPZBKDqO/Q==}
     engines: {node: '>=8.6'}
 
+  mime-db@1.52.0:
+    resolution: {integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==}
+    engines: {node: '>= 0.6'}
+
+  mime-types@2.1.35:
+    resolution: {integrity: sha512-ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw==}
+    engines: {node: '>= 0.6'}
+
   mime@1.6.0:
     resolution: {integrity: sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==}
     engines: {node: '>=4'}
@@ -2021,6 +2108,9 @@ packages:
     resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
     hasBin: true
+
+  proxy-from-env@1.1.0:
+    resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
 
   prr@1.0.1:
     resolution: {integrity: sha512-yPw4Sng1gWghHQWj0B3ZggWUm4qVbPwPFcRG8KyxiU7J2OHFSoEHKS+EZ3fv5l1t9CyCiop6l/ZYeWbrgoQejw==}
@@ -2338,6 +2428,15 @@ packages:
     peerDependencies:
       eslint: '>=6.0.0'
 
+  vue-i18n-bridge@9.13.1:
+    resolution: {integrity: sha512-atPhHmpf+/DGMSrXYFDAWjkwKbKXbL+tY5EGHA3pyPiJwaUZi3rkrYdafBwctZ0DxTzb8NpLOizl/IiD1VzYyA==}
+    engines: {node: '>= 16'}
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+
   vue-i18n@8.28.2:
     resolution: {integrity: sha512-C5GZjs1tYlAqjwymaaCPDjCyGo10ajUphiwA922jKt9n7KPpqR7oM1PCwYzhB/E7+nT3wfdG3oRre5raIT1rKA==}
     peerDependencies:
@@ -2412,8 +2511,14 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
+  zrender@4.3.2:
+    resolution: {integrity: sha512-bIusJLS8c4DkIcdiK+s13HiQ/zjQQVgpNohtd8d94Y2DnJqgM1yjh/jpDb8DoL6hd7r8Awagw8e3qK/oLaWr3g==}
+
   zrender@5.4.1:
     resolution: {integrity: sha512-M4Z05BHWtajY2241EmMPHglDQAJ1UyHQcYsxDNzD9XLSkPDqMq4bB28v9Pb4mvHnVQ0GxyTklZ/69xCFP6RXBA==}
+
+  zrender@5.4.4:
+    resolution: {integrity: sha512-0VxCNJ7AGOMCWeHVyTrGzUgrK4asT4ml9PEkeGirAkKNYXYzoPJCLvmyfdoOXcjTHPs10OZVMfD1Rwg16AZyYw==}
 
 snapshots:
 
@@ -2494,6 +2599,23 @@ snapshots:
   '@humanwhocodes/module-importer@1.0.1': {}
 
   '@humanwhocodes/object-schema@2.0.3': {}
+
+  '@intlify/core-base@9.13.1':
+    dependencies:
+      '@intlify/message-compiler': 9.13.1
+      '@intlify/shared': 9.13.1
+
+  '@intlify/message-compiler@9.13.1':
+    dependencies:
+      '@intlify/shared': 9.13.1
+      source-map-js: 1.2.0
+
+  '@intlify/shared@9.13.1': {}
+
+  '@intlify/vue-devtools@9.13.1':
+    dependencies:
+      '@intlify/core-base': 9.13.1
+      '@intlify/shared': 9.13.1
 
   '@jridgewell/gen-mapping@0.3.5':
     dependencies:
@@ -2967,11 +3089,11 @@ snapshots:
     transitivePeerDependencies:
       - vue
 
-  '@opentiny/vue-chart-liquidfill@2.17.0(echarts@5.4.1)(vue@2.7.16)':
+  '@opentiny/vue-chart-liquidfill@2.17.0(echarts@5.4.3)(vue@2.7.16)':
     dependencies:
       '@opentiny/vue-chart-core': 2.17.1
       '@opentiny/vue-common': 2.17.0(vue@2.7.16)
-      echarts-liquidfill: 3.1.0(echarts@5.4.1)
+      echarts-liquidfill: 3.1.0(echarts@5.4.3)
     transitivePeerDependencies:
       - echarts
       - vue
@@ -3049,16 +3171,16 @@ snapshots:
     transitivePeerDependencies:
       - vue
 
-  '@opentiny/vue-chart-wordcloud@2.17.0(echarts@5.4.1)(vue@2.7.16)':
+  '@opentiny/vue-chart-wordcloud@2.17.0(echarts@5.4.3)(vue@2.7.16)':
     dependencies:
       '@opentiny/vue-chart-core': 2.17.1
       '@opentiny/vue-common': 2.17.0(vue@2.7.16)
-      echarts-wordcloud: 2.0.0(echarts@5.4.1)
+      echarts-wordcloud: 2.0.0(echarts@5.4.3)
     transitivePeerDependencies:
       - echarts
       - vue
 
-  '@opentiny/vue-chart@2.17.0(echarts@5.4.1)(vue@2.7.16)':
+  '@opentiny/vue-chart@2.17.0(echarts@5.4.3)(vue@2.7.16)':
     dependencies:
       '@opentiny/vue-autonavi-map': 2.17.0(vue@2.7.16)
       '@opentiny/vue-baidu-map': 2.17.0(vue@2.7.16)
@@ -3072,7 +3194,7 @@ snapshots:
       '@opentiny/vue-chart-heatmap': 2.17.0(vue@2.7.16)
       '@opentiny/vue-chart-histogram': 2.17.0(vue@2.7.16)
       '@opentiny/vue-chart-line': 2.17.0(vue@2.7.16)
-      '@opentiny/vue-chart-liquidfill': 2.17.0(echarts@5.4.1)(vue@2.7.16)
+      '@opentiny/vue-chart-liquidfill': 2.17.0(echarts@5.4.3)(vue@2.7.16)
       '@opentiny/vue-chart-map': 2.17.0(vue@2.7.16)
       '@opentiny/vue-chart-pie': 2.17.0(vue@2.7.16)
       '@opentiny/vue-chart-radar': 2.17.0(vue@2.7.16)
@@ -3082,7 +3204,7 @@ snapshots:
       '@opentiny/vue-chart-sunburst': 2.17.0(vue@2.7.16)
       '@opentiny/vue-chart-tree': 2.17.0(vue@2.7.16)
       '@opentiny/vue-chart-waterfall': 2.17.0(vue@2.7.16)
-      '@opentiny/vue-chart-wordcloud': 2.17.0(echarts@5.4.1)(vue@2.7.16)
+      '@opentiny/vue-chart-wordcloud': 2.17.0(echarts@5.4.3)(vue@2.7.16)
       '@opentiny/vue-common': 2.17.0(vue@2.7.16)
       '@opentiny/vue-locale': 2.17.0
       '@opentiny/vue-theme': 3.17.3
@@ -4909,7 +5031,7 @@ snapshots:
     transitivePeerDependencies:
       - vue
 
-  '@opentiny/vue@2.17.0(echarts@5.4.1)(vue@2.7.16)':
+  '@opentiny/vue@2.17.0(echarts@5.4.3)(vue@2.7.16)':
     dependencies:
       '@opentiny/vue-action-menu': 2.17.0(vue@2.7.16)
       '@opentiny/vue-action-sheet': 2.17.0(vue@2.7.16)
@@ -4945,7 +5067,7 @@ snapshots:
       '@opentiny/vue-cascader-select': 2.17.0(vue@2.7.16)
       '@opentiny/vue-cascader-view': 2.17.0(vue@2.7.16)
       '@opentiny/vue-cell': 2.17.0(vue@2.7.16)
-      '@opentiny/vue-chart': 2.17.0(echarts@5.4.1)(vue@2.7.16)
+      '@opentiny/vue-chart': 2.17.0(echarts@5.4.3)(vue@2.7.16)
       '@opentiny/vue-chart-bar': 2.17.0(vue@2.7.16)
       '@opentiny/vue-chart-boxplot': 2.17.0(vue@2.7.16)
       '@opentiny/vue-chart-candle': 2.17.0(vue@2.7.16)
@@ -4956,7 +5078,7 @@ snapshots:
       '@opentiny/vue-chart-heatmap': 2.17.0(vue@2.7.16)
       '@opentiny/vue-chart-histogram': 2.17.0(vue@2.7.16)
       '@opentiny/vue-chart-line': 2.17.0(vue@2.7.16)
-      '@opentiny/vue-chart-liquidfill': 2.17.0(echarts@5.4.1)(vue@2.7.16)
+      '@opentiny/vue-chart-liquidfill': 2.17.0(echarts@5.4.3)(vue@2.7.16)
       '@opentiny/vue-chart-map': 2.17.0(vue@2.7.16)
       '@opentiny/vue-chart-pie': 2.17.0(vue@2.7.16)
       '@opentiny/vue-chart-process': 2.17.0(vue@2.7.16)
@@ -4967,7 +5089,7 @@ snapshots:
       '@opentiny/vue-chart-sunburst': 2.17.0(vue@2.7.16)
       '@opentiny/vue-chart-tree': 2.17.0(vue@2.7.16)
       '@opentiny/vue-chart-waterfall': 2.17.0(vue@2.7.16)
-      '@opentiny/vue-chart-wordcloud': 2.17.0(echarts@5.4.1)(vue@2.7.16)
+      '@opentiny/vue-chart-wordcloud': 2.17.0(echarts@5.4.3)(vue@2.7.16)
       '@opentiny/vue-checkbox': 2.17.0(vue@2.7.16)
       '@opentiny/vue-checkbox-button': 2.17.0(vue@2.7.16)
       '@opentiny/vue-checkbox-group': 2.17.0(vue@2.7.16)
@@ -5150,6 +5272,8 @@ snapshots:
   '@types/node@16.18.103': {}
 
   '@types/semver@7.5.8': {}
+
+  '@types/web-bluetooth@0.0.20': {}
 
   '@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@4.7.4))(eslint@8.57.0)(typescript@4.7.4)':
     dependencies:
@@ -5347,6 +5471,25 @@ snapshots:
     optionalDependencies:
       '@types/node': 16.18.103
 
+  '@vueuse/core@10.11.0(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16)':
+    dependencies:
+      '@types/web-bluetooth': 0.0.20
+      '@vueuse/metadata': 10.11.0
+      '@vueuse/shared': 10.11.0(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16)
+      vue-demi: 0.14.9(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+
+  '@vueuse/metadata@10.11.0': {}
+
+  '@vueuse/shared@10.11.0(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16)':
+    dependencies:
+      vue-demi: 0.14.9(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+
   acorn-jsx@5.3.2(acorn@8.12.1):
     dependencies:
       acorn: 8.12.1
@@ -5390,9 +5533,19 @@ snapshots:
       is-array-buffer: 3.0.4
       is-shared-array-buffer: 1.0.3
 
+  asynckit@0.4.0: {}
+
   available-typed-arrays@1.0.7:
     dependencies:
       possible-typed-array-names: 1.0.0
+
+  axios@1.7.2:
+    dependencies:
+      follow-redirects: 1.15.6
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
 
   balanced-match@1.0.2: {}
 
@@ -5459,6 +5612,10 @@ snapshots:
     dependencies:
       color-convert: 2.0.1
       color-string: 1.9.1
+
+  combined-stream@1.0.8:
+    dependencies:
+      delayed-stream: 1.0.0
 
   commander@2.20.3: {}
 
@@ -5534,6 +5691,8 @@ snapshots:
       has-property-descriptors: 1.0.2
       object-keys: 1.1.1
 
+  delayed-stream@1.0.0: {}
+
   dijkstrajs@1.0.3: {}
 
   dir-glob@3.0.1:
@@ -5544,18 +5703,27 @@ snapshots:
     dependencies:
       esutils: 2.0.3
 
-  echarts-liquidfill@3.1.0(echarts@5.4.1):
+  echarts-liquidfill@3.1.0(echarts@5.4.3):
     dependencies:
-      echarts: 5.4.1
+      echarts: 5.4.3
 
-  echarts-wordcloud@2.0.0(echarts@5.4.1):
+  echarts-wordcloud@2.0.0(echarts@5.4.3):
     dependencies:
-      echarts: 5.4.1
+      echarts: 5.4.3
+
+  echarts@4.9.0:
+    dependencies:
+      zrender: 4.3.2
 
   echarts@5.4.1:
     dependencies:
       tslib: 2.3.0
       zrender: 5.4.1
+
+  echarts@5.4.3:
+    dependencies:
+      tslib: 2.3.0
+      zrender: 5.4.4
 
   emoji-regex@8.0.0: {}
 
@@ -5881,9 +6049,17 @@ snapshots:
 
   flatted@3.3.1: {}
 
+  follow-redirects@1.15.6: {}
+
   for-each@0.3.3:
     dependencies:
       is-callable: 1.2.7
+
+  form-data@4.0.0:
+    dependencies:
+      asynckit: 0.4.0
+      combined-stream: 1.0.8
+      mime-types: 2.1.35
 
   fs.realpath@1.0.0: {}
 
@@ -6172,6 +6348,12 @@ snapshots:
       braces: 3.0.3
       picomatch: 2.3.1
 
+  mime-db@1.52.0: {}
+
+  mime-types@2.1.35:
+    dependencies:
+      mime-db: 1.52.0
+
   mime@1.6.0:
     optional: true
 
@@ -6331,6 +6513,8 @@ snapshots:
       fast-diff: 1.3.0
 
   prettier@2.8.8: {}
+
+  proxy-from-env@1.1.0: {}
 
   prr@1.0.1:
     optional: true
@@ -6654,6 +6838,18 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  vue-i18n-bridge@9.13.1(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16):
+    dependencies:
+      '@intlify/core-base': 9.13.1
+      '@intlify/shared': 9.13.1
+      '@intlify/vue-devtools': 9.13.1
+      '@vue/devtools-api': 6.6.3
+      vue-demi: 0.14.9(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16)
+    optionalDependencies:
+      '@vue/composition-api': 1.7.2(vue@2.7.16)
+    transitivePeerDependencies:
+      - vue
+
   vue-i18n@8.28.2(vue@2.7.16):
     dependencies:
       vue: 2.7.16
@@ -6738,6 +6934,12 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
+  zrender@4.3.2: {}
+
   zrender@5.4.1:
+    dependencies:
+      tslib: 2.3.0
+
+  zrender@5.4.4:
     dependencies:
       tslib: 2.3.0

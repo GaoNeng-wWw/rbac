@@ -11,5 +11,6 @@ module.exports = {
   ],
   rules: {
     "vue/multi-word-component-names": ["off"],
+    'indent': ['warn', 2],
   },
 };

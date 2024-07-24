@@ -13,10 +13,16 @@
     "@opentiny/vue": "2",
     "@opentiny/vue-icon": "2",
     "@opentiny/vue-locale": "2",
+    "@opentiny/vue-theme": "^3.17.3",
+    "@vueuse/core": "^10.11.0",
+    "axios": "^1.7.2",
+    "echarts": "~5.4.3",
     "pinia": "^2.0.16",
     "vue": "^2",
     "vue-i18n": "8",
-    "vue-router": "^3.5.4"
+    "vue-i18n-bridge": "^9.13.1",
+    "vue-router": "^3.5.4",
+    "echarts4": "npm:echarts@4.9.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.0",

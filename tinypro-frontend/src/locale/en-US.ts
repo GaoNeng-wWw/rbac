@@ -1,5 +1,5 @@
 import localeLogin from '@/views/login/locale/en-US';
-// import localeTheme from '@/components/theme/locale/en-US';
+import localeTheme from '@/components/theme/locale/en-US';
 
 // import localeSearchTable from '@/views/list/search-table/locale/en-US';
 
@@ -18,7 +18,7 @@ import localeLogin from '@/views/login/locale/en-US';
 // import localeUserInfo from '@/views/user/info/locale/en-US';
 // import localeUserSetting from '@/views/user/setting/locale/en-US';
 
-// import localekanban from '@/views/board/locale/en-US';
+import localekanban from '@/views/board/locale/en-US';
 
 // import localeHello from '@/views/cloud/hello/locale/en-US';
 
@@ -47,7 +47,7 @@ export default {
   'messageBox.userSettings': 'User Settings',
   'messageBox.logout': 'Logout',
   'menu.cloud': 'Cloud service capability',
-  // ...localeTheme,
+  ...localeTheme,
   ...localeSettings,
   ...localeLogin,
   // ...localeSearchTable,
@@ -61,7 +61,7 @@ export default {
   // ...localeUserInfo,
   // ...localeUserSetting,
   // ...localeDetailForm,
-  // ...localekanban,
+  ...localekanban,
   // ...localeHello,
   // ...localeContracts,
   ...localeHttpError,

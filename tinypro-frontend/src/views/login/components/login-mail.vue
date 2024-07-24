@@ -54,93 +54,98 @@
 </template>
 
 <script lang="ts" setup>
-  import { inject, ref, reactive, computed } from 'vue';
-  import { useRouter } from '@/router';
-  import {
-    Form as TinyForm,
-    FormItem as TinyFormItem,
-    Input as TinyInput,
-    Button as TinyButton,
-    Checkbox as TinyCheckbox,
-    Link as TinyLink,
-    Modal,
-    Notify,
-  } from '@opentiny/vue';
-  import {t} from '@opentiny/vue-locale';
-  // import { useUserStore } from '@/store';
-  import useLoading from '@/hooks/loading';
+import { inject, ref, reactive } from 'vue';
+import { useRouter } from '@/router';
+import {
+  Form as TinyForm,
+  FormItem as TinyFormItem,
+  Input as TinyInput,
+  Button as TinyButton,
+  Checkbox as TinyCheckbox,
+  Link as TinyLink,
+  Modal,
+  Notify,
+} from '@opentiny/vue';
+import {t} from '@opentiny/vue-locale';
+import { useUserInfoStore } from '@/stores/user';
+import useLoading from '@/hooks/loading';
+import { login } from '@/api/user';
 
-  const router = useRouter();
-  const { loading, setLoading } = useLoading();
-  // const userStore = useUserStore();
-  const loginFormMail = ref();
-  const rules = {
-      mailname: [
-        {
-          required: true,
-          // message: t('login.form.mailName.errMsg'),
-          trigger: 'change',
-        },
-      ],
-      mailpassword: [
-        {
-          required: true,
-          // message: t('login.form.mailpassword.errMsg'),
-          trigger: 'change',
-        },
-      ],
-  }
+const userInfo = useUserInfoStore();
 
-  const loginMail = reactive({
-    mailname: 'admin@example.com',
-    mailpassword: 'admin',
-    rememberPassword: true,
+const router = useRouter();
+const { loading, setLoading } = useLoading();
+const loginFormMail = ref();
+const rules = {
+  mailname: [
+    {
+      required: true,
+      message: t('login.form.mailName.errMsg'),
+      trigger: 'change',
+    },
+  ],
+  mailpassword: [
+    {
+      required: true,
+      message: t('login.form.mailpassword.errMsg'),
+      trigger: 'change',
+    },
+  ],
+}
+
+const loginMail = reactive({
+  mailname: 'admin@no-reply.com',
+  mailpassword: 'admin',
+  rememberPassword: true,
+});
+
+// 切换模式
+const handle: any = inject('handle');
+const typeChange = () => {
+  handle(true);
+};
+
+function handleSubmit() {
+  loginFormMail.value?.validate(async (valid: boolean) => {
+    if (!valid) {
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const {data} = await login({
+        email: loginMail.mailname,
+        password: loginMail.mailpassword
+      })
+      userInfo.$patch({
+        token: data,
+      })
+      Modal.message({
+        message: t('login.form.login.success'),
+        status: 'success',
+      });
+      const { redirect, ...othersQuery } = router.currentRoute.query;
+      router.push({
+        name: (redirect as string) || 'Home',
+        query: {
+          ...othersQuery,
+        },
+      });
+    } catch (err) {
+      Notify({
+        type: 'error',
+        title: t('login.tip.right'),
+        message: t('login.tip.mail'),
+        position: 'top-right',
+        duration: 2000,
+        customClass: 'my-custom-cls',
+      });
+    } finally {
+      setLoading(false);
+    }
   });
-
-  // 切换模式
-  const handle: any = inject('handle');
-  const typeChange = () => {
-    handle(true);
-  };
-
-  function handleSubmit() {
-    loginFormMail.value?.validate(async (valid: boolean) => {
-      if (!valid) {
-        return;
-      }
-
-      setLoading(true);
-
-      try {
-        // await userStore.login({
-        //   username: loginMail.mailname,
-        //   password: loginMail.mailpassword,
-        // });
-        Modal.message({
-          message: t('login.form.login.success'),
-          status: 'success',
-        });
-        const { redirect, ...othersQuery } = router.currentRoute.query;
-        router.push({
-          name: (redirect as string) || 'Home',
-          query: {
-            ...othersQuery,
-          },
-        });
-      } catch (err) {
-        Notify({
-          type: 'error',
-          title: t('login.tip.right'),
-          message: t('login.tip.mail'),
-          position: 'top-right',
-          duration: 2000,
-          customClass: 'my-custom-cls',
-        });
-      } finally {
-        setLoading(false);
-      }
-    });
-  }
+}
 </script>
 
 <style lang="less" scoped>

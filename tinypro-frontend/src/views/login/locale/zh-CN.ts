@@ -11,7 +11,7 @@ export default {
   'login.form.login.success': '欢迎使用',
   'login.form.userName.placeholder': '用户名：admin',
   'login.form.password.placeholder': '密码：admin',
-  'login.form.mailName.placeholder': "邮箱名：123{'@'}example.com",
+  'login.form.mailName.placeholder': "邮箱名：admin{'@'}no-reply.com",
   'login.form.mailpassword.placeholder': '密码：admin',
   'login.form.registerMail.placeholder': '注册邮箱：',
   'login.form.registerPassword.placeholder': '注册密码：',
@@ -40,7 +40,7 @@ export default {
   'login.banner.subSlogan3': '实现灵活的区块式开发',
   'login.icon.language': '语言',
   'login.tip.info': '用户名：admin，密码 admin',
-  'login.tip.mail': "用户名：admin{'@'}example.com，密码 admin",
+  'login.tip.mail': "用户名：admin@no-reply.com，密码 admin",
   'login.tip.right': '请输入正确的用户名密码',
   'login.main.text': 'TinyPro 中后台前端解决方案',
 };
