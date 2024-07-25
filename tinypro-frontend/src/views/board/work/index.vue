@@ -37,7 +37,7 @@
       <div class="right">
         <h3>{{ $t('work.index.Inquiry') }}</h3>
         <div class="card more">
-          <dl v-for="item in Inquiry" :key="(item as any)">
+          <dl v-for="item in Inquiry" :key="item.value">
             <dt>{{ $t(item.label) }}</dt>
             <dd>
               <a href="javascript:;">{{ $t(item.value) }}</a>
@@ -46,7 +46,7 @@
         </div>
         <h3>{{ $t('work.index.Home') }}</h3>
         <div class="card more">
-          <dl v-for="item in Home" :key="(item as any)">
+          <dl v-for="item in Home" :key="item.value">
             <dt>{{ $t(item.label) }}</dt>
             <dd>
               <a href="javascript:;">{{ $t(item.value) }}</a>

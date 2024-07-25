@@ -54,11 +54,11 @@
 </template>
 
 <script lang="ts" setup>
-  import {
-    Layout as TinyLayout,
-    Row as TinyRow,
-    Col as TinyCol,
-  } from '@opentiny/vue';
+import {
+  Layout as TinyLayout,
+  Row as TinyRow,
+  Col as TinyCol,
+} from '@opentiny/vue';
 </script>
 
 <style scoped lang="less">

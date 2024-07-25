@@ -52,19 +52,19 @@
 </template>
 
 <script lang="ts" setup>
-  import {
-    Layout as TinyLayout,
-    Row as TinyRow,
-    Col as TinyCol,
-    Select as TinySelect,
-    Option as TinyOption,
-    Loading,
-  } from '@opentiny/vue';
-  import { reactive, onMounted, watch, ref } from 'vue';
-  import { getUserPractic, getUserChange } from '@/api/board';
+import {
+  Layout as TinyLayout,
+  Row as TinyRow,
+  Col as TinyCol,
+  Select as TinySelect,
+  Option as TinyOption,
+  Loading,
+} from '@opentiny/vue';
+import { reactive, onMounted, watch, ref } from 'vue';
+import { getUserPractic, getUserChange } from '@/api/board';
 
-  // 加载效果
-  const state = reactive<{
+// 加载效果
+const state = reactive<{
     loading: any;
     options: any;
     project: string;
@@ -74,41 +74,41 @@
     project: '',
   });
 
-  // 请求数据接口方法
-  const fetchData = async () => {
-    state.loading = Loading.service({
-      text: 'loading...',
-      target: document.getElementById('container'),
-      background: 'rgba(0, 0, 0, 0.7)',
-    });
-    try {
-      const { data } = await getUserPractic();
-      state.options = data.options;
-    } finally {
-      state.loading.close();
-    }
-  };
-
-  // 初始化请求数据
-  onMounted(() => {
-    fetchData();
+// 请求数据接口方法
+const fetchData = async () => {
+  state.loading = Loading.service({
+    text: 'loading...',
+    target: document.getElementById('container'),
+    background: 'rgba(0, 0, 0, 0.7)',
   });
+  try {
+    const { data:{data} } = await getUserPractic();
+    state.options = data.options;
+  } finally {
+    state.loading.close();
+  }
+};
 
-  // 切换数据
-  let number = ref([]);
-  const fetchSelect = async (param: string) => {
-    const { data } = await getUserChange(param);
-    number.value = data;
-  };
+// 初始化请求数据
+onMounted(() => {
+  fetchData();
+});
 
-  // 切换数据
-  watch(
-    state,
-    (newValue, oldValue) => {
-      fetchSelect(newValue.project);
-    },
-    { immediate: true }
-  );
+// 切换数据
+const number = ref([]);
+const fetchSelect = async (param: string) => {
+  const { data:{data} } = await getUserChange(param);
+  number.value = data;
+};
+
+// 切换数据
+watch(
+  state,
+  (newValue, oldValue) => {
+    fetchSelect(newValue.project);
+  },
+  { immediate: true }
+);
 </script>
 
 <style scoped lang="less">
