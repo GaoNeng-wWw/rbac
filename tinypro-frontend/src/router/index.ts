@@ -47,6 +47,36 @@ const router = new VueRouter({
               },
             },
           ],
+        },
+        {
+          path: 'form',
+          name: 'Form',
+          component: () => import('@/views/form/index.vue'),
+          meta: {
+            locale: 'menu.form',
+            requiresAuth: true,
+            order: 3,
+          },
+          children: [
+            {
+              path: 'base',
+              name: 'Base',
+              component: () => import('@/views/form/base/index.vue'),
+              meta: {
+                locale: 'menu.form.base',
+                requiresAuth: true,
+              },
+            },
+            {
+              path: 'step',
+              name: 'Step',
+              component: () => import('@/views/form/step/index.vue'),
+              meta: {
+                locale: 'menu.form.step',
+                requiresAuth: true,
+              },
+            },
+          ],
         }
       ]
     },

@@ -3,8 +3,8 @@ import localeTheme from '@/components/theme/locale/zh-CN';
 
 // import localeSearchTable from '@/views/list/search-table/locale/zh-CN';
 
-// import localeStepForm from '@/views/form/step/locale/zh-CN';
-// import localeBaseForm from '@/views/form/base/locale/zh-CN';
+import localeStepForm from '@/views/form/step/locale/zh-CN';
+import localeBaseForm from '@/views/form/base/locale/zh-CN';
 
 // import localeDetailForm from '@/views/profile/detail/locale/zh-CN';
 
@@ -51,8 +51,8 @@ export default {
   ...localeSettings,
   ...localeLogin,
   // ...localeSearchTable,
-  // ...localeStepForm,
-  // ...localeBaseForm,
+  ...localeStepForm,
+  ...localeBaseForm,
   // ...localeSuccess,
   // ...localeError,
   // ...locale403,

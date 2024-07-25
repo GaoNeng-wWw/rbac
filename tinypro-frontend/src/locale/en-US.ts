@@ -3,8 +3,8 @@ import localeTheme from '@/components/theme/locale/en-US';
 
 // import localeSearchTable from '@/views/list/search-table/locale/en-US';
 
-// import localeStepForm from '@/views/form/step/locale/en-US';
-// import localeBaseForm from '@/views/form/base/locale/en-US';
+import localeStepForm from '@/views/form/step/locale/en-US';
+import localeBaseForm from '@/views/form/base/locale/en-US';
 
 // import localeDetailForm from '@/views/profile/detail/locale/en-US';
 
@@ -51,8 +51,8 @@ export default {
   ...localeSettings,
   ...localeLogin,
   // ...localeSearchTable,
-  // ...localeStepForm,
-  // ...localeBaseForm,
+  ...localeStepForm,
+  ...localeBaseForm,
   // ...localeSuccess,
   // ...localeError,
   // ...locale403,
