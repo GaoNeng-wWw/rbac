@@ -3,10 +3,10 @@ import { RoleType } from '@/types/roleType';
 export default {
   path: 'board',
   name: 'Board',
-  id: 'Board',
   label: 'Board',
   component: () => import('@/views/board/index.vue'),
   meta: {
+    id: 'Board',
     locale: 'menu.board',
     requiresAuth: true,
     order: 1,
@@ -16,10 +16,10 @@ export default {
     {
       path: 'home',
       name: 'Home',
-      id: 'Home',
       label: 'Home',
       component: () => import('@/views/board/home/index.vue'),
       meta: {
+        id: 'Home',
         locale: 'menu.board.home',
         requiresAuth: true,
         roles: [RoleType.admin],
@@ -28,10 +28,10 @@ export default {
     {
       path: 'work',
       name: 'Work',
-      id: 'Work',
       label: 'Work',
       component: () => import('@/views/board/work/index.vue'),
       meta: {
+        id: 'Work',
         locale: 'menu.board.work',
         requiresAuth: true,
         roles: [RoleType.admin],

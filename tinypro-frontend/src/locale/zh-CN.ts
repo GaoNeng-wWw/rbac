@@ -14,19 +14,14 @@ import localeError from '@/views/result/error/locale/zh-CN';
 import locale403 from '@/views/exception/403/locale/zh-CN';
 import locale404 from '@/views/exception/404/locale/zh-CN';
 import locale500 from '@/views/exception/500/locale/zh-CN';
-
 import localeUserInfo from '@/views/user/info/locale/zh-CN';
 import localeUserSetting from '@/views/user/setting/locale/zh-CN';
-
 import localekanban from '@/views/board/locale/zh-CN';
-
 import localeHello from '@/views/cloud/hello/locale/zh-CN';
-
 import localeContracts from '@/views/cloud/contracts/locale/zh-CN';
-
 import localeSettings from './zh-CN/settings';
-
 import localeHttpError from './zh-CN/httpError';
+import localMenu from '@/components/menu/locales/zh-CN';
 
 export default {
   'menu.board': '看板',
@@ -65,4 +60,5 @@ export default {
   ...localeHello,
   ...localeContracts,
   ...localeHttpError,
+  ...localMenu
 };

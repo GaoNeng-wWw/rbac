@@ -1,5 +1,7 @@
+import type { RouteConfig } from "vue-router";
+
 const modules:Record<string, any> = import.meta.glob('./modules/*.ts', { eager: true });
-const appRoutes: any[] = [];
+const appRoutes: RouteConfig[] = [];
 
 Object.keys(modules).forEach((key) => {
   const defaultModule = modules[key].default;

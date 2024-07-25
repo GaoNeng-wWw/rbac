@@ -23,11 +23,11 @@ const router = new VueRouter({
   ],
 });
 
-console.log(appRoutes)
+
 
 export const useRouter = () => router
+export const useRoute = () => appRoutes;
 
-const userInfo = useUserInfoStore(pinia);
 router.beforeEach((to, from, next) => {
   // if (!to.meta?.public && !userInfo.token){
   //   next({

@@ -27,6 +27,7 @@ import localeContracts from '@/views/cloud/contracts/locale/en-US';
 import localeSettings from './en-US/settings';
 
 import localeHttpError from './en-US/httpError';
+import localeMenu from '@/components/menu/locales/en-US';
 
 export default {
   'menu.board': 'Dashboard Page',
@@ -65,4 +66,5 @@ export default {
   ...localeHello,
   ...localeContracts,
   ...localeHttpError,
+  ...localeMenu
 };

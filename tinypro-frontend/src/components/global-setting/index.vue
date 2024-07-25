@@ -60,7 +60,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { useI18n } from '@/locale';
+import { t } from '@opentiny/vue-locale';
 import { useClipboard } from '@vueuse/core';
 import {
   Button as TinyButton,
@@ -74,7 +74,6 @@ const iconClose = IconClose();
 const { copy } = useClipboard();
 const appStore = useAppStore();
 const visible = computed(() => appStore.Settings);
-const { t } = useI18n();
 
 const cancel = () => {
   appStore.updateSettings({ Settings: false });
