@@ -22,7 +22,7 @@
               multiple
             >
               <tiny-option
-                v-for="item in (projectData?.director as any)"
+                v-for="item in (projectData?.director)"
                 :key="item"
                 :label="$t(item)"
                 :value="item"

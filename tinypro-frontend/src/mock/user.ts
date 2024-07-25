@@ -96,7 +96,7 @@ export default [
 
   // 用户中心数据
   {
-    url: '/api/user/data',
+    url: '/mock/user/data',
     method: 'post',
     response: (params: any) => {
       const { sort, startTime, endTime, filterStatus, filterType } = JSON.parse(

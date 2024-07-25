@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType, defineProps } from 'vue';
+import { defineProps } from 'vue';
 import {
   Breadcrumb as TinyBreadcrumb,
   BreadcrumbItem as TinyBreadcrumbItem,
@@ -15,7 +15,7 @@ import {
 
 defineProps({
   items: {
-    type: Array as PropType<string[]>,
+    type: Array,
     default() {
       return [];
     },

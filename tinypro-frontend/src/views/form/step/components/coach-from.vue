@@ -31,7 +31,7 @@
               multiple
             >
               <tiny-option
-                v-for="item in (projectData?.position as any)"
+                v-for="item in (projectData?.position)"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
@@ -51,7 +51,7 @@
               multiple
             >
               <tiny-option
-                v-for="item in (projectData?.HR as any)"
+                v-for="item in (projectData?.HR)"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
@@ -68,7 +68,7 @@
               multiple
             >
               <tiny-option
-                v-for="item in (projectData?.mentor as any)"
+                v-for="item in (projectData?.mentor)"
                 :key="item"
                 :label="item"
                 :value="item"

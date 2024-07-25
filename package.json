@@ -4,6 +4,7 @@
 		"vite-plugin-mock": "^3.0.2"
 	},
 	"devDependencies": {
-		"@types/mockjs": "^1.0.10"
+		"@types/mockjs": "^1.0.10",
+		"query-string": "^9.1.0"
 	}
 }

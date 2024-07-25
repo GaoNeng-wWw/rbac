@@ -1,28 +1,28 @@
 import localeLogin from '@/views/login/locale/zh-CN';
 import localeTheme from '@/components/theme/locale/zh-CN';
 
-// import localeSearchTable from '@/views/list/search-table/locale/zh-CN';
+import localeSearchTable from '@/views/list/search-table/locale/zh-CN';
 
 import localeStepForm from '@/views/form/step/locale/zh-CN';
 import localeBaseForm from '@/views/form/base/locale/zh-CN';
 
-// import localeDetailForm from '@/views/profile/detail/locale/zh-CN';
+import localeDetailForm from '@/views/profile/detail/locale/zh-CN';
 
-// import localeSuccess from '@/views/result/success/locale/zh-CN';
-// import localeError from '@/views/result/error/locale/zh-CN';
+import localeSuccess from '@/views/result/success/locale/zh-CN';
+import localeError from '@/views/result/error/locale/zh-CN';
 
-// import locale403 from '@/views/exception/403/locale/zh-CN';
-// import locale404 from '@/views/exception/404/locale/zh-CN';
-// import locale500 from '@/views/exception/500/locale/zh-CN';
+import locale403 from '@/views/exception/403/locale/zh-CN';
+import locale404 from '@/views/exception/404/locale/zh-CN';
+import locale500 from '@/views/exception/500/locale/zh-CN';
 
-// import localeUserInfo from '@/views/user/info/locale/zh-CN';
-// import localeUserSetting from '@/views/user/setting/locale/zh-CN';
+import localeUserInfo from '@/views/user/info/locale/zh-CN';
+import localeUserSetting from '@/views/user/setting/locale/zh-CN';
 
 import localekanban from '@/views/board/locale/zh-CN';
 
-// import localeHello from '@/views/cloud/hello/locale/zh-CN';
+import localeHello from '@/views/cloud/hello/locale/zh-CN';
 
-// import localeContracts from '@/views/cloud/contracts/locale/zh-CN';
+import localeContracts from '@/views/cloud/contracts/locale/zh-CN';
 
 import localeSettings from './zh-CN/settings';
 
@@ -50,19 +50,19 @@ export default {
   ...localeTheme,
   ...localeSettings,
   ...localeLogin,
-  // ...localeSearchTable,
+  ...localeSearchTable,
   ...localeStepForm,
   ...localeBaseForm,
-  // ...localeSuccess,
-  // ...localeError,
-  // ...locale403,
-  // ...locale404,
-  // ...locale500,
-  // ...localeUserInfo,
-  // ...localeUserSetting,
-  // ...localeDetailForm,
+  ...localeSuccess,
+  ...localeError,
+  ...locale403,
+  ...locale404,
+  ...locale500,
+  ...localeUserInfo,
+  ...localeUserSetting,
+  ...localeDetailForm,
   ...localekanban,
-  // ...localeHello,
-  // ...localeContracts,
+  ...localeHello,
+  ...localeContracts,
   ...localeHttpError,
 };

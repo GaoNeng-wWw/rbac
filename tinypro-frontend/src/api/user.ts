@@ -18,3 +18,7 @@ export function getUserInfo(email: string){
   })
 }
 
+export function getUserData(){
+  return axios.get('/mock/user/data')
+}
+
