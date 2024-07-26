@@ -9,14 +9,6 @@
       node-key="id"
       wrap
     >
-      <!-- <template #default="slotScope">
-        <template v-for="(item, index) in routerTitle">
-          <span v-if="slotScope.label === item.value" class="menu-title" :key="index">
-            <component :is="item.icon"></component>
-            <span :class="item.bold">{{ $t(item.name) }}</span>
-          </span>
-        </template>
-      </template> -->
     </tiny-tree-menu>
   </div>
 </template>
